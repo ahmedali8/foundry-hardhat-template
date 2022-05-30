@@ -1,0 +1,34 @@
+extends:
+  - "@commitlint/config-conventional"
+rules:
+  "subject-case":
+    - 1
+    - "always"
+    - "sentence-case"
+  "type-enum":
+    - 1
+    - "always"
+    - - build
+      - ci
+      - chore
+      - docs
+      - feat
+      - fix
+      - perf
+      - refactor
+      - revert
+      - style
+      - test
+help: |
+  **Possible types**:
+  `build`:            Change build process, tooling or dependencies.
+  `ci`:               Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+  `chore`:            No production code change. Updating grunt tasks etc
+  `docs`:             Adds or alters documentation.
+  `feat`:             Adds a new feature.
+  `fix`:              Solves a bug.
+  `perf`:             Improves performance.
+  `refactor`:         Rewrites code without feature, performance or bug changes.
+  `revert`:           Changes that reverting other changes
+  `style`:            Improves formatting, white-space.
+  `test`:             Adds or modifies tests.

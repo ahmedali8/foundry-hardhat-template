@@ -1,0 +1,4 @@
+# directories
+**/generated
+**/node_modules
+**/lib
