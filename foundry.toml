@@ -3,7 +3,9 @@
 src = 'contracts'                                             # the source directory
 test = 'test/foundry'                                         # the test directory
 out = 'generated/artifacts/foundry'                           # the output directory (for artifacts)
-libs = ["node_modules", "lib"]                                # a list of library directories
+libs = ['node_modules', 'lib']                                # a list of library directories
+script = 'scripts/foundry'
+broadcast = 'generated/broadcast'
 remappings = []                                               # a list of remappings
 libraries = []                                                # a list of deployed libraries to link against
 cache = true                                                  # whether to cache builds or not
@@ -34,27 +36,27 @@ block_coinbase = '0x0000000000000000000000000000000000000000' # the address of `
 block_timestamp = 0                                           # the value of `block.timestamp` in tests
 block_difficulty = 0                                          # the value of `block.difficulty` in tests
 # How to treat revert (and require) reason strings.
-# Possible values are: "default", "strip", "debug" and "verboseDebug".
-# "default" does not inject compiler-generated revert strings and keeps user-supplied ones.
-# "strip" removes all revert strings (if possible, i.e. if literals are used) keeping side-effects
-# "debug" injects strings for compiler-generated internal reverts, implemented for ABI encoders V1 and V2 for now.
-# "verboseDebug" even appends further information to user-supplied revert strings (not yet implemented)
-revert_strings = "default"
+# Possible values are: 'default', 'strip', 'debug' and 'verboseDebug'.
+# 'default' does not inject compiler-generated revert strings and keeps user-supplied ones.
+# 'strip' removes all revert strings (if possible, i.e. if literals are used) keeping side-effects
+# 'debug' injects strings for compiler-generated internal reverts, implemented for ABI encoders V1 and V2 for now.
+# 'verboseDebug' even appends further information to user-supplied revert strings (not yet implemented)
+revert_strings = 'default'
 # caches storage retrieved locally for certain chains and endpoints
-# can also be restricted to `chains = ["optimism", "mainnet"]`
-# by default all endpoints will be cached, alternative options are "remote" for only caching non localhost endpoints and "<regex>"
+# can also be restricted to `chains = ['optimism', 'mainnet']`
+# by default all endpoints will be cached, alternative options are 'remote' for only caching non localhost endpoints and '<regex>'
 # to disable storage caching entirely set `no_storage_caching = true`
-rpc_storage_caching = { chains = "all", endpoints = "all" }
+rpc_storage_caching = { chains = 'all', endpoints = 'all' }
 # this overrides `rpc_storage_caching` entirely
 no_storage_caching = false
 # use ipfs method to generate the metadata hash, solc's default.
-# To not include the metadata hash, to allow for deterministic code: https://docs.soliditylang.org/en/latest/metadata.html, use "none"
-bytecode_hash = "none"
+# To not include the metadata hash, to allow for deterministic code: https://docs.soliditylang.org/en/latest/metadata.html, use 'none'
+bytecode_hash = 'none'
 # If this option is enabled, Solc is instructed to generate output (bytecode) only for the required contracts
 # this can reduce compile time for `forge test` a bit but is considered experimental at this point.
 sparse_mode = false
 # Setting this option enables decoding of error traces from mainnet deployed / verfied contracts via etherscan
-etherscan_api_key="YOURETHERSCANAPIKEY"
+etherscan_api_key='YOURETHERSCANAPIKEY'
 
 ## optimizer details for the default profile
 [default.optimizer_details]
