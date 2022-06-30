@@ -46,6 +46,7 @@ yarn-error.log*
 **/artifacts
 **/cache
 .deps
+**/src/types/**
 
 # TypeScript bindings output directory
 typechain-types
@@ -69,3 +70,4 @@ out
 flattened.sol
 
 # Miscellaneous files
+**/storageLayout
