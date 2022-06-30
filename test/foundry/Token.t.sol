@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.14;
+pragma solidity 0.8.15;
 
-import {console} from "forge-std/console.sol";
-import {stdStorage, StdStorage, Test} from "forge-std/Test.sol";
+import { console } from "forge-std/console.sol";
+import { stdStorage, StdStorage, Test } from "forge-std/Test.sol";
 
-import {Utils} from "./utils/Utils.sol";
-import {Token} from "contracts/Token.sol";
+import { Utils } from "./utils/Utils.sol";
+import { Token } from "contracts/Token.sol";
 
 contract BaseSetup is Token, Test {
     Utils internal utils;
@@ -66,11 +66,7 @@ contract WhenAliceHasSufficientFunds is WhenTransferringTokens {
         bool success = transferToken(from, to, transferAmount);
 
         assertTrue(success);
-        assertEqDecimal(
-            balanceOf(from),
-            fromBalanceBefore - transferAmount,
-            decimals()
-        );
+        assertEqDecimal(balanceOf(from), fromBalanceBefore - transferAmount, decimals());
         assertEqDecimal(balanceOf(to), transferAmount, decimals());
     }
 
@@ -88,22 +84,14 @@ contract WhenAliceHasSufficientFunds is WhenTransferringTokens {
 
     function testTransferWithFuzzing(uint64 transferAmount) public {
         vm.assume(transferAmount != 0);
-        itTransfersAmountCorrectly(
-            alice,
-            bob,
-            transferAmount % maxTransferAmount
-        );
+        itTransfersAmountCorrectly(alice, bob, transferAmount % maxTransferAmount);
     }
 
     function testTransferWithMockedCall() public {
         vm.prank(alice);
         vm.mockCall(
             address(this),
-            abi.encodeWithSelector(
-                this.transfer.selector,
-                bob,
-                maxTransferAmount
-            ),
+            abi.encodeWithSelector(this.transfer.selector, bob, maxTransferAmount),
             abi.encode(false)
         );
         bool success = this.transfer(bob, maxTransferAmount);

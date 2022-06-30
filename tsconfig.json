@@ -25,6 +25,7 @@
     "tasks/**/*",
     "test/**/*",
     "types/**/*",
-    "utils/**/*"
+    "utils/**/*",
+    "config/**/*"
   ]
 }

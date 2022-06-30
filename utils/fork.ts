@@ -7,9 +7,7 @@ export async function resetHardhat() {
   });
 }
 
-export async function impersonateAccounts(
-  accountsToImpersonate: string[] = []
-) {
+export async function impersonateAccounts(accountsToImpersonate: string[] = []) {
   await network.provider.request({
     method: "hardhat_impersonateAccount",
     params: [...accountsToImpersonate],

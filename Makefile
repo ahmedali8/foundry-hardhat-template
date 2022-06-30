@@ -17,7 +17,7 @@ clean           :; forge clean
 snapshot        :; forge snapshot
 
 # chmod scripts
-scripts         :; chmod +x ./scripts/shell/*
+scripts         :; chmod +x ./shell/*
 
 # fork mainnet with Hardhat
 mainnet-fork    :; npx hardhat node --fork ${ETH_MAINNET_RPC_URL}

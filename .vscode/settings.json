@@ -1,5 +1,5 @@
 {
-  "editor.rulers": [80],
+  "editor.rulers": [100],
   "files.autoSave": "off",
   "editor.formatOnSave": true,
   "[javascript]": {
@@ -11,7 +11,7 @@
       "strings": true
     }
   },
-  "solidity.compileUsingRemoteVersion": "v0.8.14+commit.80d49f37"
+  "solidity.compileUsingRemoteVersion": "v0.8.15"
   // "solidity.packageDefaultDependenciesContractsDirectory": "src",
   // "solidity.packageDefaultDependenciesDirectory": "lib"
 }

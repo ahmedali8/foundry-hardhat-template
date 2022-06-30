@@ -1,7 +1,7 @@
 import { TransactionResponse } from "@ethersproject/abstract-provider";
+import { Signer } from "@ethersproject/abstract-signer";
 import { getAddress } from "@ethersproject/address";
-import { BigNumber, Signer } from "ethers";
-import { ethers } from "hardhat";
+import { BigNumber } from "@ethersproject/bignumber";
 
 import { fromWei, toGwei } from "./format";
 
@@ -14,17 +14,17 @@ export async function delayLog(ms: number) {
   await sleep(ms);
 }
 
-/**
- * Get ether balance of address provided.
- * @param {*} address valid eth address.
- * @returns undefined or Balance in BN.
- */
-export async function etherBalance(
-  address: string
-): Promise<BigNumber | undefined> {
-  if (!isAddress(address)) return;
-  return await ethers.provider.getBalance(address);
-}
+// /**
+//  * Get ether balance of address provided.
+//  * @param {*} address valid eth address.
+//  * @returns undefined or Balance in BN.
+//  */
+// export async function etherBalance(
+//   address: string
+// ): Promise<BigNumber | undefined> {
+//   if (!isAddress(address)) return;
+//   return await ethers.provider.getBalance(address);
+// }
 
 /**
  * returns the checksummed address if the address is valid,
@@ -44,9 +44,7 @@ export function isAddress(value: string): string | false {
  * or other transaction executed
  * @returns null or information string
  */
-export async function getExtraGasInfo(
-  tx: TransactionResponse
-): Promise<string | null> {
+export async function getExtraGasInfo(tx: TransactionResponse): Promise<string | null> {
   if (!tx) return null;
   const gasPrice = tx.gasPrice;
   if (gasPrice === undefined) return null;
@@ -54,18 +52,13 @@ export async function getExtraGasInfo(
   const txReceipt = await tx.wait();
   const gas = txReceipt.gasUsed;
 
-  const extraGasInfo = `${toGwei(gasPrice)} gwei, ${fromWei(
-    gasUsed
-  )} ETH, ${gas} gas,
+  const extraGasInfo = `${toGwei(gasPrice)} gwei, ${fromWei(gasUsed)} ETH, ${gas} gas,
   txHash ${tx.hash}`;
 
   return extraGasInfo;
 }
 
-export async function send(
-  signer: Signer,
-  txParams: any
-): Promise<TransactionResponse> {
+export async function send(signer: Signer, txParams: any): Promise<TransactionResponse> {
   return await signer.sendTransaction(txParams);
   //    , (error, transactionHash) => {
   //     if (error) {

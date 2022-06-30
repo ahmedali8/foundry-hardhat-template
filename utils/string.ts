@@ -240,11 +240,7 @@ export function removeNonASCII(str: string) {
 /**
  * String interpolation
  */
-export function interpolate(
-  template: string,
-  replacements: { [x: string]: any },
-  syntax: any
-) {
+export function interpolate(template: string, replacements: { [x: string]: any }, syntax: any) {
   var stache = /\{\{(\w+)\}\}/g; //mustache-like
 
   var replaceFn = function (match: any, prop: string) {
@@ -257,11 +253,7 @@ export function interpolate(
 /**
  * Pad string with `char` if its' length is smaller than `minLen`
  */
-export function rpad(
-  str: string | any[],
-  minLen: number,
-  ch: string | undefined
-) {
+export function rpad(str: string | any[], minLen: number, ch: string | undefined) {
   ch = ch || " ";
   return str.length < minLen ? str + repeat(ch, minLen - str.length) : str;
 }
@@ -269,11 +261,7 @@ export function rpad(
 /**
  * Pad string with `char` if its' length is smaller than `minLen`
  */
-export function lpad(
-  str: string | any[],
-  minLen: number,
-  ch: string | undefined
-) {
+export function lpad(str: string | any[], minLen: number, ch: string | undefined) {
   ch = ch || " ";
 
   return str.length < minLen ? repeat(ch, minLen - str.length) + str : str;

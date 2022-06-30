@@ -6,7 +6,7 @@ const makeDirectoryAsync = fs.mkdir;
 const readFileAsync = fs.readFile;
 const writeFileAsync = fs.writeFile;
 
-const ensureDirectoryExists = async (directory: PathLike): Promise<void> => {
+export const ensureDirectoryExists = async (directory: PathLike): Promise<void> => {
   try {
     await makeDirectoryAsync(directory, { recursive: true });
   } catch (err) {
@@ -14,19 +14,12 @@ const ensureDirectoryExists = async (directory: PathLike): Promise<void> => {
   }
 };
 
-export const ensureDirectory = async (directory: PathLike): Promise<void> => {
-  ensureDirectoryExists(directory);
-};
-
 export const writeFile = async (filePath: string, data: any): Promise<void> => {
   await ensureDirectoryExists(path.dirname(filePath));
   await writeFileAsync(filePath, data);
 };
 
-export const writeJSONFile = async (
-  filePath: string,
-  data: any
-): Promise<void> => {
+export const writeJSONFile = async (filePath: string, data: any): Promise<void> => {
   await writeFile(filePath, JSON.stringify(data, null, 2));
 };
 
@@ -37,4 +30,20 @@ export const parseFile = async (filePath: string): Promise<any> => {
   }
 
   return null;
+};
+
+export const deleteFolderRecursive = (directoryPath: string) => {
+  if (fs.existsSync(directoryPath)) {
+    fs.readdirSync(directoryPath).forEach((file) => {
+      const curPath = path.join(directoryPath, file);
+      if (fs.lstatSync(curPath).isDirectory()) {
+        // recurse
+        deleteFolderRecursive(curPath);
+      } else {
+        // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(directoryPath);
+  }
 };

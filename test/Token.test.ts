@@ -15,15 +15,8 @@ describe("Token Unit tests", () => {
   beforeEach(async () => {
     [owner, user, ...accounts] = await ethers.getSigners();
 
-    const TokenFactory: Token__factory = await ethers.getContractFactory(
-      "Token"
-    );
-    token = await TokenFactory.deploy(
-      "TEST_TOKEN",
-      "TST",
-      toWei("1000000"),
-      owner.address
-    );
+    const TokenFactory: Token__factory = await ethers.getContractFactory("Token");
+    token = await TokenFactory.deploy("TEST_TOKEN", "TST", toWei("1000000"), owner.address);
   });
 
   describe("#constructor", async () => {
@@ -50,9 +43,9 @@ describe("Token Unit tests", () => {
     });
 
     it("fails to mint if account is zero address", async () => {
-      await expect(
-        token.connect(accounts[0]).mint(ZERO_ADDRESS, toWei("1"))
-      ).to.be.revertedWith("ERC20: mint to the zero address");
+      await expect(token.connect(accounts[0]).mint(ZERO_ADDRESS, toWei("1"))).to.be.revertedWith(
+        "ERC20: mint to the zero address"
+      );
     });
   });
 });

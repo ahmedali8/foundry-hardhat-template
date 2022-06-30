@@ -11,7 +11,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  const CONTRACT_NAME = "TestingContract";
+  const CONTRACT_NAME = "Token";
 
   await preDeploy({ signerAddress: deployer, contractName: CONTRACT_NAME });
   const deployResult: DeployResult = await deploy(CONTRACT_NAME, {
@@ -25,8 +25,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   // You don't want to verify on localhost
   try {
     if (chainId !== "31337" && chainId !== "1337") {
+      const contractPath = `contracts/${CONTRACT_NAME}.sol:${CONTRACT_NAME}`;
       await verifyContract({
-        contractName: CONTRACT_NAME,
+        contractPath: contractPath,
         contractAddress: deployResult.address,
         args: deployResult.args || [],
       });
@@ -37,4 +38,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 export default func;
-func.tags = ["TestingContract"];
+func.tags = ["Token"];

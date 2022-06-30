@@ -10,14 +10,12 @@ async function main() {
   const { chainId } = await ethers.provider.getNetwork();
   const [owner] = await ethers.getSigners();
 
-  const CONTRACT_NAME = "TestingContract";
+  const CONTRACT_NAME = "Token";
   await preDeploy({
     signerAddress: owner.address,
     contractName: CONTRACT_NAME,
   });
-  const TokenContract: Token__factory = await ethers.getContractFactory(
-    CONTRACT_NAME
-  );
+  const TokenContract: Token__factory = await ethers.getContractFactory(CONTRACT_NAME);
   const token: Token = await TokenContract.deploy(
     "TokenName",
     "TCT",
@@ -27,21 +25,9 @@ async function main() {
   await postDeploy({ contractName: CONTRACT_NAME, contract: token });
 
   /*
-  // If you want to send some ETH to a contract on deploy (make your constructor payable!)
-  const contract = await deployContract({
-    signer: owner,
-    contractName: "TestingContract",
-    args: args,
-    overrides: {
-      value: toWei("1"), // send 1 ether
-    },
-  });
-  */
-
-  /*
   // Mint 100 tokens for user
   const [_, user] = await ethers.getSigners();
-  const tx = await contract.connect(user).mint(user.address, toWei("100"));
+  const tx = await token.connect(user).mint(user.address, toWei("100"));
   const extraGasInfo = await getExtraGasInfo(tx);
   console.log("Minting: ", extraGasInfo);
   */
@@ -49,10 +35,11 @@ async function main() {
   // You don't want to verify on localhost
   try {
     if (chainId != 31337 && chainId != 1337) {
+      const contractPath = `contracts/${CONTRACT_NAME}.sol:${CONTRACT_NAME}`;
       await verifyContract({
-        contractName: CONTRACT_NAME,
+        contractPath: contractPath,
         contractAddress: token.address,
-        args: [],
+        args: ["TokenName", "TCT", toWei("6000000"), owner.address],
       });
     }
   } catch (error) {

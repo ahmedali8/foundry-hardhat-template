@@ -1,18 +1,16 @@
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { getContractFactory } from "@nomiclabs/hardhat-ethers/types";
+import { Signer } from "@ethersproject/abstract-signer";
+import { Contract } from "@ethersproject/contracts";
 import chalk from "chalk";
-import { Contract, ContractFactory, Signer } from "ethers";
 import { ethers } from "hardhat";
 
-import { writeFile } from "./files";
-import { abiEncodeArgs, fromWei } from "./format";
-import { etherBalance, getExtraGasInfo } from "./misc";
+import { fromWei } from "./format";
+import { getExtraGasInfo } from "./misc";
 
 export async function getContractIns(
   contractNameOrAbi: string | any[],
   address: string,
   signer: Signer
-): Promise<Contract> {
+) {
   return await ethers.getContractAt(contractNameOrAbi, address, signer);
 }
 
@@ -24,12 +22,10 @@ export async function preDeploy({
   contractName: string;
 }): Promise<void> {
   const { chainId, name } = await ethers.provider.getNetwork();
-  const ethBalance = await etherBalance(signerAddress);
+  const ethBalance = await ethers.provider.getBalance(signerAddress);
 
   console.log(
-    ` 🛰  Deploying: ${chalk.cyan(
-      contractName
-    )} to Network: ${name} & ChainId: ${chainId}`
+    ` 🛰  Deploying: ${chalk.cyan(contractName)} to Network: ${name} & ChainId: ${chainId}`
   );
   console.log(
     ` 🎭 Deployer: ${chalk.cyan(signerAddress)}, Balance: ${chalk.grey(
@@ -52,12 +48,7 @@ export async function postDeploy({
     extraGasInfo = (await getExtraGasInfo(contract.deployTransaction)) ?? "";
   }
 
-  console.log(
-    " 📄",
-    chalk.cyan(contractName),
-    "deployed to:",
-    chalk.magenta(contract.address)
-  );
+  console.log(" 📄", chalk.cyan(contractName), "deployed to:", chalk.magenta(contract.address));
   console.log(" ⛽", chalk.grey(extraGasInfo));
   return contract;
 }

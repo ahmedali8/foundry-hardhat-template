@@ -1,17 +1,26 @@
 import { task } from "hardhat/config";
 
-task("accounts", "Prints the list of accounts").setAction(
-  async (_taskArgs, hre) => {
-    const { ethers } = hre;
-    const accounts = await ethers.getSigners();
+import { fromWei } from "../utils/format";
 
-    for (const account of accounts) {
-      console.log(
-        `${account.address}: ${ethers.utils.formatUnits(
-          await ethers.provider.getBalance(account.address),
-          "ether"
-        )} ETH`
-      );
-    }
+task("accounts", "Prints the list of accounts").setAction(async (_taskArgs, hre) => {
+  const { ethers } = hre;
+  const accounts = await ethers.getSigners();
+
+  interface AccountsArray {
+    address: string;
+    balanceInETH: string;
   }
-);
+  const accountsArray: Array<AccountsArray> = [];
+
+  for (const account of accounts) {
+    const address = account.address;
+    const balanceInETH = fromWei(await account.getBalance());
+
+    accountsArray.push({
+      address,
+      balanceInETH,
+    });
+  }
+
+  console.table(accountsArray);
+});

@@ -90,7 +90,7 @@ See the gas usage per unit test and average gas per method call:
 ```sh
 $ REPORT_GAS=true yarn test:hh
 
-or 
+or
 
 $ yarn test:hh:gr
 ```

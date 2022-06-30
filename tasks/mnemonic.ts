@@ -19,9 +19,7 @@ task("mnemonic", "Create a mnemonic for builder deploys", async () => {
   const privateKey = `0x${wallet._privKey.toString("hex")}`;
   if (DEBUG) console.log("\nprivateKey: ", privateKey);
   const EthUtil = require("ethereumjs-util");
-  const address = `0x${EthUtil.privateToAddress(wallet._privKey).toString(
-    "hex"
-  )}`;
+  const address = `0x${EthUtil.privateToAddress(wallet._privKey).toString("hex")}`;
 
   console.log(`🔐 Mnemonic Generated as ${mnemonic}`);
   console.log(`🔐 Account Generated as ${address}, privateKey: ${privateKey}`);

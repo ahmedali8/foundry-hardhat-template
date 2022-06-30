@@ -1,6 +1,6 @@
 bracketSpacing: true
 endOfLine: auto
-printWidth: 80
+printWidth: 100
 singleQuote: false
 tabWidth: 2
 trailingComma: "es5"
@@ -15,5 +15,5 @@ overrides:
     options:
       tabWidth: 4
       useTabs: false
-      bracketSpacing: false
+      bracketSpacing: true
       explicitTypes: "always"
