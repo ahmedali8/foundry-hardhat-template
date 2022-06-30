@@ -1,0 +1,7 @@
+WhenAliceHasInsufficientFunds:testCannotTransferMoreThanAvailable() (gas: 14833)
+WhenAliceHasInsufficientFunds:testCannotTransferToZero() (gas: 10482)
+WhenAliceHasSufficientFunds:testFindMapping() (gas: 132583)
+WhenAliceHasSufficientFunds:testTransferAllTokens() (gas: 36698)
+WhenAliceHasSufficientFunds:testTransferHalfTokens() (gas: 41604)
+WhenAliceHasSufficientFunds:testTransferOneToken() (gas: 39394)
+WhenAliceHasSufficientFunds:testTransferWithMockedCall() (gas: 12807)
