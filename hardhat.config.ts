@@ -109,11 +109,12 @@ const config: HardhatUserConfig = {
     ...getAllNetworkConfigs(),
   },
   paths: {
-    artifacts: "./generated/artifacts",
-    cache: "./generated/cache",
+    artifacts: "./generated/artifacts/hardhat",
+    cache: "./generated/cache/hardhat",
+    deploy: "./deploy",
+    deployments: "./generated/deployments",
     sources: "./contracts",
     tests: "./test",
-    deployments: "./generated/deployments",
   },
   preprocess: {
     eachLine: removeConsoleLog(

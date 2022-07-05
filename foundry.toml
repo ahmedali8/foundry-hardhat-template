@@ -1,10 +1,10 @@
 ## defaults for all profiles
 [default]
 src = 'contracts'                                             # the source directory
-test = 'test/foundry'                                         # the test directory
+test = 'sol_test'                                             # the test directory
+script = 'sol_script'                                        # the script directory
 out = 'generated/artifacts/foundry'                           # the output directory (for artifacts)
 libs = ['node_modules', 'lib']                                # a list of library directories
-script = 'scripts/foundry'
 broadcast = 'generated/broadcast'
 remappings = []                                               # a list of remappings
 libraries = []                                                # a list of deployed libraries to link against

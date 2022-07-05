@@ -15,7 +15,11 @@
   "files.associations": {
     ".gas-snapshot": "julia"
   },
-  "solidity.compileUsingRemoteVersion": "v0.8.15"
-  // "solidity.packageDefaultDependenciesContractsDirectory": "src",
-  // "solidity.packageDefaultDependenciesDirectory": "lib"
+  "solidity.linter": "solhint",
+  "solidity.defaultCompiler": "remote",
+  "solidity.compileUsingRemoteVersion": "v0.8.15",
+  "solidity.enabledAsYouTypeCompilationErrorCheck": true,
+  "solidity.validationDelay": 1500,
+  "solidity.packageDefaultDependenciesContractsDirectory": "contracts",
+  "solidity.packageDefaultDependenciesDirectory": "'lib', 'node_modules'"
 }
