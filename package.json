@@ -97,6 +97,7 @@
     "lint-staged": "^13.0.3",
     "lodash": "^4.17.21",
     "mocha": "^10.0.0",
+    "mocha-chai-jest-snapshot": "^1.1.3",
     "prettier": "^2.7.1",
     "prettier-plugin-solidity": "^1.0.0-beta.19",
     "shelljs": "^0.8.5",
