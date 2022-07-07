@@ -1,9 +1,9 @@
 import type { BigNumber } from "@ethersproject/bignumber";
 import { AddressZero, MaxUint256, Zero } from "@ethersproject/constants";
 
-import { toBN, toWei } from "../../../utils/format";
-import { TokenErrors } from "../../shared/errors";
-import { expect } from "../../shared/expect";
+import { toBN, toWei } from "../../../../utils/format";
+import { TokenErrors } from "../../../shared/errors";
+import { expect } from "../../../shared/expect";
 
 export default function shouldBehaveLikeMint(): void {
   context("when the beneficiary is the zero address", function () {

@@ -1,4 +1,4 @@
-import { expect } from "../../shared/expect";
+import { expect } from "../../../shared/expect";
 
 export default function shouldBehaveLikeNameGetter(): void {
   it("retrieves the name", async function () {

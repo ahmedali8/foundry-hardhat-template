@@ -1,8 +1,8 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { Zero } from "@ethersproject/constants";
 
-import { toWei } from "../../../utils/format";
-import { expect } from "../../shared/expect";
+import { toWei } from "../../../../utils/format";
+import { expect } from "../../../shared/expect";
 
 export default function shouldBehaveLikeBalanceOf(): void {
   context("when the account does not have a balance", function () {

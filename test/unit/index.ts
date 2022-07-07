@@ -1,7 +1,7 @@
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { ethers, waffle } from "hardhat";
 
-import { Signers } from "./shared/types";
+import { Signers } from "../shared/types";
 import { testToken } from "./token/Token";
 
 const { createFixtureLoader } = waffle;

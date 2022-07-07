@@ -1,4 +1,4 @@
-import { expect } from "../../shared/expect";
+import { expect } from "../../../shared/expect";
 
 export default function shouldBehaveLikeSymbolGetter(): void {
   it("retrieves the symbol", async function () {
