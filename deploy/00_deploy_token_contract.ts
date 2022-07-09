@@ -17,7 +17,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const deployResult: DeployResult = await deploy(CONTRACT_NAME, {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: ["testing new created token", "TCT", toWei("6000000"), deployer],
+    args: ["TEST_TOKEN", "TST", toWei("1000000"), deployer],
     log: true,
     // waitConfirmations: 5,
   });
