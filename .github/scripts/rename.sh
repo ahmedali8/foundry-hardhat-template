@@ -4,7 +4,7 @@
 set -euo pipefail
 
 # Define the input vars
-GITHUB_REPOSITORY=${1?Error: Please pass username/repo, e.g. ahmedali8/hardhat-ts-template}
+GITHUB_REPOSITORY=${1?Error: Please pass username/repo, e.g. ahmedali8/foundry-hardhat-template}
 GITHUB_REPOSITORY_OWNER=${2?Error: Please pass username, e.g. ahmedali8}
 
 echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
@@ -28,8 +28,8 @@ sedi () {
   sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
 }
 
-# Rename instances of "ahmedali8/hardhat-ts-template" to the new repo name in README.md for badges only
-sedi "/gitpod/ s|ahmedali8/hardhat-ts-template|"${GITHUB_REPOSITORY}"|;" "README.md"
-sedi "/gitpod-badge/ s|ahmedali8/hardhat-ts-template|"${GITHUB_REPOSITORY}"|;" "README.md"
-sedi "/gha/ s|ahmedali8/hardhat-ts-template|"${GITHUB_REPOSITORY}"|;" "README.md"
-sedi "/gha-badge/ s|ahmedali8/hardhat-ts-template|"${GITHUB_REPOSITORY}"|;" "README.md"
+# Rename instances of "ahmedali8/foundry-hardhat-template" to the new repo name in README.md for badges only
+sedi "/gitpod/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "README.md"
+sedi "/gitpod-badge/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "README.md"
+sedi "/gha/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "README.md"
+sedi "/gha-badge/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "README.md"

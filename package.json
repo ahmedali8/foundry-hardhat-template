@@ -1,6 +1,6 @@
 {
   "name": "@ahmedali8/foundry-hardhat-template",
-  "description": "",
+  "description": "Starter kit for writing Solidity smart contracts in hardhat and foundry environment",
   "version": "0.1.0",
   "author": {
     "name": "ahmedali8",
@@ -103,8 +103,11 @@
     "blockchain",
     "ethereum",
     "hardhat",
+    "forge",
+    "foundry",
     "smart-contracts",
-    "solidity"
+    "solidity",
+    "template"
   ],
   "license": "UNLICENSED",
   "private": true,

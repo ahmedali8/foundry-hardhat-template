@@ -14,3 +14,14 @@ trim_trailing_whitespace = true
 
 [*.sol]
 indent_size = 4
+
+[*.tree]
+indent_size = 1
+
+[Makefile]
+indent_style = tab
+
+[*.md]
+# double whitespace at end of line
+# denotes a line break in Markdown
+trim_trailing_whitespace = false

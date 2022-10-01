@@ -44,6 +44,13 @@ yarn-error.log*
 .deps
 **/types
 
+# Foundry files
+**/foundry_cache
+**/out
+!/broadcast
+/broadcast/*
+/broadcast/*/31337/
+
 # solidity-coverage directory and output file
 coverage
 coverage.json

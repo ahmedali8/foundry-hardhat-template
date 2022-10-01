@@ -5,9 +5,9 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@ahmedali8/hardhat-ts-template@workspace:.":
+"@ahmedali8/foundry-hardhat-template@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@ahmedali8/hardhat-ts-template@workspace:."
+  resolution: "@ahmedali8/foundry-hardhat-template@workspace:."
   dependencies:
     "@commitlint/cli": ^17.0.3
     "@commitlint/config-conventional": ^17.0.3
