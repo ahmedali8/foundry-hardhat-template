@@ -1,0 +1,5 @@
+{
+  "editor.rulers": [100],
+  "editor.formatOnSave": true,
+  "solidity.compileUsingRemoteVersion": "v0.8.17"
+}

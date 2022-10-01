@@ -1,0 +1,21 @@
+bracketSpacing: true
+endOfLine: auto
+printWidth: 100
+singleQuote: false
+tabWidth: 2
+trailingComma: "es5"
+
+overrides:
+  - files: "*.sol"
+    options:
+      compiler: "0.8.17"
+      tabWidth: 4
+      useTabs: false
+      bracketSpacing: true
+      explicitTypes: "always"
+  - files: "*.ts"
+    options:
+      importOrder: ["<THIRD_PARTY_MODULES>", "^[./]"]
+      importOrderParserPlugins: ["typescript"]
+      importOrderSeparation: true
+      importOrderSortSpecifiers: true
