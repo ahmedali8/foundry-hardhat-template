@@ -23,10 +23,7 @@ const infuraUrl = (network: string): string => `https://${network}.infura.io/v3/
 export enum NetworkName {
   // ETHEREUM
   MAINNET = "mainnet",
-  KOVAN = "kovan",
   GOERLI = "goerli",
-  RINKEBY = "rinkeby",
-  ROPSTEN = "ropsten",
   SEPOLIA = "sepolia",
 
   // BINANCE SMART CHAIN
@@ -39,11 +36,11 @@ export enum NetworkName {
 
   // OPTIMISM
   OPTIMISM_MAINNET = "optimism-mainnet",
-  OPTIMISM_KOVAN = "optimism-kovan",
+  OPTIMISM_GOERLI = "optimism-goerli",
 
   // ARBITRUM
   ARBITRUM_MAINNET = "arbitrum-mainnet",
-  ARBITRUM_RINKEBY = "arbitrum-rinkeby",
+  ARBITRUM_GOERLI = "arbitrum-goerli",
 
   // AVALANCHE
   AVALANCHE_MAINNET = "avalanche-mainnet",
@@ -65,25 +62,13 @@ export const NETWORKS: { readonly [key in NetworkName]: Network } = {
     chainId: 1,
     url: infuraUrl("mainnet"),
   },
-  [NetworkName.KOVAN]: {
-    chainId: 42,
-    url: infuraUrl("kovan"),
-  },
   [NetworkName.GOERLI]: {
     chainId: 5,
     url: infuraUrl("goerli"),
   },
-  [NetworkName.RINKEBY]: {
-    chainId: 4,
-    url: infuraUrl("rinkeby"),
-  },
-  [NetworkName.ROPSTEN]: {
-    chainId: 3,
-    url: infuraUrl("ropsten"),
-  },
   [NetworkName.SEPOLIA]: {
-    chainId: 11155111,
-    url: "",
+    chainId: 11_155_111,
+    url: infuraUrl("sepolia"),
   },
 
   // BINANCE SMART CHAIN
@@ -102,7 +87,7 @@ export const NETWORKS: { readonly [key in NetworkName]: Network } = {
     url: infuraUrl("polygon-mainnet"),
   },
   [NetworkName.POLYGON_MUMBAI]: {
-    chainId: 80001,
+    chainId: 80_001,
     url: infuraUrl("polygon-mumbai"),
   },
 
@@ -111,28 +96,28 @@ export const NETWORKS: { readonly [key in NetworkName]: Network } = {
     chainId: 10,
     url: infuraUrl("optimism-mainnet"),
   },
-  [NetworkName.OPTIMISM_KOVAN]: {
-    chainId: 69,
-    url: infuraUrl("optimism-kovan"),
+  [NetworkName.OPTIMISM_GOERLI]: {
+    chainId: 420,
+    url: infuraUrl("optimism-goerli"),
   },
 
   // ARBITRUM
   [NetworkName.ARBITRUM_MAINNET]: {
-    chainId: 42161,
+    chainId: 42_161,
     url: infuraUrl("arbitrum-mainnet"),
   },
-  [NetworkName.ARBITRUM_RINKEBY]: {
-    chainId: 421611,
-    url: infuraUrl("arbitrum-rinkeby"),
+  [NetworkName.ARBITRUM_GOERLI]: {
+    chainId: 421_611,
+    url: infuraUrl("arbitrum-goerli"),
   },
 
   // AVALANCHE
   [NetworkName.AVALANCHE_MAINNET]: {
-    chainId: 43114,
+    chainId: 43_114,
     url: `https://api.avax.network/ext/bc/C/rpc`,
   },
   [NetworkName.FUJI_AVALANCHE]: {
-    chainId: 43113,
+    chainId: 43_113,
     url: `https://api.avax-test.network/ext/bc/C/rpc`,
   },
 
@@ -142,7 +127,7 @@ export const NETWORKS: { readonly [key in NetworkName]: Network } = {
     url: `https://rpcapi.fantom.network`,
   },
   [NetworkName.FANTOM_TESTNET]: {
-    chainId: 4002,
+    chainId: 4_002,
     url: `https://rpc.testnet.fantom.network`,
   },
 } as const;

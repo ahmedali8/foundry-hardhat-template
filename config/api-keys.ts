@@ -6,10 +6,7 @@ dotenvConfig({ path: resolve(__dirname, "../.env") });
 export const API_KEYS: string | Record<string, string> | undefined = {
   // ETHEREUM
   mainnet: process.env.ETHERSCAN_API_KEY || "",
-  kovan: process.env.ETHERSCAN_API_KEY || "",
   goerli: process.env.ETHERSCAN_API_KEY || "",
-  rinkeby: process.env.ETHERSCAN_API_KEY || "",
-  ropsten: process.env.ETHERSCAN_API_KEY || "",
   sepolia: process.env.ETHERSCAN_API_KEY || "",
 
   // BINANCE SMART CHAIN
@@ -22,7 +19,7 @@ export const API_KEYS: string | Record<string, string> | undefined = {
 
   // OPTIMISM
   optimisticEthereum: process.env.OPTIMISM_API_KEY || "",
-  optimisticKovan: process.env.OPTIMISM_API_KEY || "",
+  optimisticGoerli: process.env.OPTIMISM_API_KEY || "",
 
   // ARBITRUM
   arbitrumOne: process.env.ARBISCAN_API_KEY || "",
