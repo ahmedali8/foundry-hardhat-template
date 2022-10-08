@@ -3,9 +3,9 @@ import { resolve } from "path";
 
 dotenvConfig({ path: resolve(__dirname, "../.env") });
 
-const INFURA_KEY = process.env.INFURA_PROJECT_ID;
+const INFURA_KEY = process.env.INFURA_API_KEY;
 if (typeof INFURA_KEY === "undefined") {
-  throw new Error(`INFURA_PROJECT_ID must be a defined environment variable`);
+  throw new Error(`INFURA_API_KEY must be a defined environment variable`);
 }
 
 const infuraUrl = (network: string): string => `https://${network}.infura.io/v3/${INFURA_KEY}`;
