@@ -2,20 +2,20 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { ethers } from "hardhat";
 
-import type { Signers } from "../shared/types";
-import { testToken } from "./token/Token";
+import type { Contracts, Signers } from "../shared/types";
+import { testLock } from "./lock/Lock";
 
-describe("Unit tests", () => {
+describe("Unit tests", function () {
   before(async function () {
     this.signers = {} as Signers;
+    this.contracts = {} as Contracts;
 
     const signers: SignerWithAddress[] = await ethers.getSigners();
-    this.signers.owner = signers[0];
-    this.signers.user = signers[1];
-    this.signers.accounts = signers.slice(2);
+    this.signers.deployer = signers[0];
+    this.signers.accounts = signers.slice(1);
 
     this.loadFixture = loadFixture;
   });
 
-  testToken();
+  testLock();
 });

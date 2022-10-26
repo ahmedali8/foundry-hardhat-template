@@ -9,6 +9,7 @@ task("networks", "Prints the list of configured networks").setAction(
 
     const networksArray = Object.entries(networks).map((network) => {
       const key = network[0];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const value = network[1] as any;
 
       return {

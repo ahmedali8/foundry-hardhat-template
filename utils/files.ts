@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs, { PathLike } from "fs-extra";
 import path from "path";
 

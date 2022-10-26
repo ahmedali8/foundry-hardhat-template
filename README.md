@@ -286,7 +286,8 @@ Verify the contract using `verifyContract` function in [verify.ts](./utils/verif
 Set block explorer api key in `.env` file or using command, refer to `.env.example` for more
 insight.
 
-Example deploy script with `verifyContract` function is [here](./deploy/00_deploy_token_contract.ts)
+Example deploy script with `verifyContract` function is
+[00_deploy_lock_contract.ts](./deploy/00_deploy_lock_contract.ts)
 
 ## Foundry
 
@@ -313,9 +314,21 @@ $ forge clean
 Deploy to Anvil:
 
 ```sh
-$ forge script sol_script/Token.s.sol:TokenScript \
+$ anvil
+```
+
+Update your .env file with a private key given to you by Anvil.
+
+```sh
+# To load the variables in the .env file
+$ source .env
+
+# To deploy and verify our contract
+$ forge script sol_script/Lock.s.sol:LockScript \
   --fork-url http://localhost:8545 \
-  --broadcast --private-key $PRIVATE_KEY
+  --broadcast \
+  --private-key $PRIVATE_KEY \
+  -vvvv
 ```
 
 For instructions on how to deploy to a testnet or mainnet, check out the

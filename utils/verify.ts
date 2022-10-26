@@ -12,6 +12,7 @@ export async function waitForConfirmations(tx: TransactionResponse, waitConfirma
 interface VerifyContract {
   contractPath: string;
   contractAddress: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   args: any[];
   delay?: number;
 }
@@ -37,6 +38,7 @@ export async function verifyContract({
       constructorArguments: args,
       contract: contractPath,
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (error.message.toLowerCase().includes("already verified")) {
       console.log("Already verified!");

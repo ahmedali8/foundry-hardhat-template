@@ -5,6 +5,7 @@ import "hardhat-contract-sizer";
 import "hardhat-deploy";
 import { removeConsoleLog } from "hardhat-preprocessor";
 import "hardhat-storage-layout";
+import "hardhat-test-suite-generator";
 import type { HardhatUserConfig } from "hardhat/config";
 import type { HttpNetworkAccountsUserConfig, NetworkUserConfig } from "hardhat/types";
 import { resolve } from "path";
@@ -123,7 +124,7 @@ const config: HardhatUserConfig = {
         settings: {
           metadata: {
             // Not including the metadata hash
-            // https://github.com/paulrberg/solidity-template/issues/31
+            // https://github.com/paulrberg/hardhat-template/issues/31
             bytecodeHash: "none",
           },
           // Disable the optimizer when debugging
@@ -142,6 +143,16 @@ const config: HardhatUserConfig = {
       },
     ],
   },
+  testSuiteGenerator: {
+    // What contracts to exclude from the test suite
+    // Defaults to []
+    excludeContracts: [],
+    // Out directory name for the test suite
+    // Must not contain "/"
+    // Defaults to "test"
+    outDirName: "test",
+  },
+
   typechain: {
     outDir: "types",
     target: "ethers-v5",

@@ -1,3 +1,5 @@
+import type { BigNumberish } from "@ethersproject/bignumber";
+import { time } from "@nomicfoundation/hardhat-network-helpers";
 import type { DeployFunction, DeployResult } from "hardhat-deploy/types";
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
 
@@ -11,14 +13,22 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  const CONTRACT_NAME = "Token";
+  const CONTRACT_NAME = "Lock";
+
+  const currentTimestampInSeconds = await time.latest();
+  const ONE_YEAR_IN_SECS = time.duration.years(1);
+  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const lockedAmount = toWei("1");
+
+  const args: [BigNumberish] = [unlockTime];
 
   await preDeploy({ signerAddress: deployer, contractName: CONTRACT_NAME });
   const deployResult: DeployResult = await deploy(CONTRACT_NAME, {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: ["testing new created token", "TCT", toWei("6000000"), deployer],
+    args: args,
     log: true,
+    value: lockedAmount,
     // waitConfirmations: 5,
   });
 
@@ -34,4 +44,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 export default func;
-func.tags = ["Token"];
+func.tags = ["Lock"];

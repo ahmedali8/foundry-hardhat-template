@@ -1,0 +1,8 @@
+withdraw.t.sol
+├── when called too soon
+│  └── it should revert
+├── when called from another account
+│  └── it should revert
+└── when unlockTime has arrived and the owner calls it
+   ├── it should emit Withdrawal event
+   └── it should transfer the funds to the owner
