@@ -1,5 +1,8 @@
 name: Create
 
+env:
+  DOTENV_CONFIG_PATH: "./.env.example"
+
 # The workflow will run only when `use this template` is used
 on:
   create:
@@ -25,12 +28,6 @@ jobs:
         run: |
           echo "## Commit results" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
-
-      # Inject all environment variables from ".env.example" in $GITHUB_ENV
-      - name: "Set dotenv"
-        uses: "c-py/action-dotenv-to-setenv@v2"
-        with:
-          env-file: ".env.example"
 
       - name: "Install the Node.js dependencies"
         run: "yarn install"

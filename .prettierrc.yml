@@ -1,6 +1,7 @@
 bracketSpacing: true
-endOfLine: auto
+endOfLine: "auto"
 printWidth: 100
+proseWrap: "always"
 singleQuote: false
 tabWidth: 2
 trailingComma: "es5"
