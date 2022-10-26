@@ -21,6 +21,12 @@ jobs:
       - name: "Check out the repo"
         uses: "actions/checkout@v3"
 
+      # Inject all environment variables from ".env.example" in $GITHUB_ENV
+      - name: "Set dotenv"
+        uses: "c-py/action-dotenv-to-setenv@v2"
+        with:
+          env-file: ".env.example"
+
       - name: "Update package.json"
         run: ./.github/scripts/rename.sh "$GITHUB_REPOSITORY" "$GITHUB_REPOSITORY_OWNER"
 
