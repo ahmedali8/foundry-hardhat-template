@@ -1,7 +1,8 @@
 import { config as dotenvConfig } from "dotenv";
 import { resolve } from "path";
 
-dotenvConfig({ path: resolve(__dirname, "../.env") });
+const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
+dotenvConfig({ path: resolve(process.cwd(), dotenvConfigPath) });
 
 export const API_KEYS: string | Record<string, string> | undefined = {
   // ETHEREUM

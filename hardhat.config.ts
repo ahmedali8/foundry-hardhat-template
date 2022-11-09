@@ -14,7 +14,8 @@ import { API_KEYS } from "./config/api-keys";
 import { NETWORKS, Network, NetworkName } from "./config/networks";
 import "./tasks";
 
-dotenvConfig({ path: resolve(__dirname, "./.env") });
+const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
+dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
 
 const ACCOUNT_TYPE: string = process.env.ACCOUNT_TYPE || "";
 const mnemonic: string = process.env.MNEMONIC || "";

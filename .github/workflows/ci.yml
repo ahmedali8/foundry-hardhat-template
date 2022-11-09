@@ -2,7 +2,7 @@ name: "CI"
 
 env:
   FOUNDRY_PROFILE: "ci"
-  # DOTENV_CONFIG_PATH: "./.env.example"
+  DOTENV_CONFIG_PATH: "./.env.example"
 
 on:
   pull_request:
@@ -31,12 +31,6 @@ jobs:
         with:
           cache: "yarn"
           node-version: "lts/*"
-
-      # Inject all environment variables from ".env.example" in $GITHUB_ENV
-      - name: Load .env file
-        uses: xom9ikk/dotenv@v2
-        with:
-          mode: example
 
       - name: "Install the Node.js dependencies"
         run: "yarn install --immutable --inline-builds"
