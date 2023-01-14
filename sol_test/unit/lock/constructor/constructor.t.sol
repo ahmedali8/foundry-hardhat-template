@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.4;
+pragma solidity >=0.8.4 <0.9.0;
 
 import { LockTest } from "../LockTest.t.sol";
 import { Lock } from "contracts/Lock.sol";
 
-contract Lock__Constructor is LockTest {
+contract Lock_Constructor is LockTest {
     /// @dev it should revert.
-    function testCannotDeploy__UnlockTimeNotInFuture() external {
-        vm.expectRevert(LockError__UnlockTimeShouldBeInTheFuture);
+    function test_RevertWhen_UnlockTimeNotInFuture() external {
+        vm.expectRevert(LockError_UnlockTimeShouldBeInTheFuture);
         new Lock(block.timestamp);
     }
 
@@ -15,7 +15,7 @@ contract Lock__Constructor is LockTest {
         _;
     }
 
-    function testDeploy__LockedAmount() external UnlockTimeInFuture {
+    function test_DeployLockedAmount() external UnlockTimeInFuture {
         uint256 actualBalance = address(lock).balance;
         uint256 expectedBalance = lockedAmount;
 

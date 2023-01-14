@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.4;
+pragma solidity >=0.8.4 <0.9.0;
 
 import { Test } from "forge-std/Test.sol";
 
@@ -66,6 +66,6 @@ abstract contract Utils is Test {
 
     /// @dev Helper function that multiplies the `amount` by `10^decimals` and returns a `uint256.`
     function toWei(uint256 value, uint256 decimals) internal pure returns (uint256) {
-        return value * 10**decimals;
+        return value * 10 ** decimals;
     }
 }

@@ -22,7 +22,7 @@ jobs:
           submodules: "recursive"
 
       - name: "Install Foundry"
-        uses: "onbjerg/foundry-toolchain@v1"
+        uses: "foundry-rs/foundry-toolchain"
         with:
           version: "nightly"
 
@@ -76,7 +76,7 @@ jobs:
       - name: "Run forge tests"
         run: "forge test"
 
-      - name: "Build the contracts"
+      - name: "Check that the contracts are each under 24kB"
         run: |
           forge --version
           forge build --sizes

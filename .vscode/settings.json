@@ -11,5 +11,6 @@
   "solidity.enabledAsYouTypeCompilationErrorCheck": true,
   "solidity.validationDelay": 1500,
   "solidity.packageDefaultDependenciesContractsDirectory": "contracts",
-  "solidity.packageDefaultDependenciesDirectory": "'lib', 'node_modules'"
+  "solidity.packageDefaultDependenciesDirectory": "'lib', 'node_modules'",
+  "dotenv.enableAutocloaking": false
 }

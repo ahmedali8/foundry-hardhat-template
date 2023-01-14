@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.4;
+pragma solidity >=0.8.4 <0.9.0;
 
 import { LockTest } from "../LockTest.t.sol";
 
-contract Lock__Owner is LockTest {
+contract Lock_Owner is LockTest {
     /// @dev it should retrieve correct owner
-    function testOwner() external {
+    function test_Owner() external {
         address actualOwner = lock.owner();
         address expectedOwner = deployer;
 

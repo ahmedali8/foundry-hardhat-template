@@ -63,3 +63,5 @@ flattened.sol
 
 # Miscellaneous files
 **/storageLayout
+*.html
+lcov.info

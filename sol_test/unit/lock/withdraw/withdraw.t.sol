@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.4;
+pragma solidity >=0.8.4 <0.9.0;
 
 import { LockTest } from "../LockTest.t.sol";
 
-contract Lock__Withdraw is LockTest {
+contract Lock_Withdraw is LockTest {
     /// @dev it should revert.
-    function testCannotWithdraw__CalledTooSoon() external {
+    function test_RevertWhen_CalledTooSoon() external {
         // Run the test.
-        vm.expectRevert(LockError__YouCantWithdrawYet);
+        vm.expectRevert(LockError_YouCantWithdrawYet);
         lock.withdraw();
     }
 
@@ -16,7 +16,7 @@ contract Lock__Withdraw is LockTest {
     }
 
     /// @dev it should revert.
-    function testCannotWithdraw__CalledFromAnotherAccount() external CalledOnTime {
+    function test_RevertWhen_CalledFromAnotherAccount() external CalledOnTime {
         // We can increase the time to unlockTime.
         vm.warp(unlockTime);
 
@@ -25,7 +25,7 @@ contract Lock__Withdraw is LockTest {
         changePrank(anotherAccount);
 
         // Run the test.
-        vm.expectRevert(LockError__YouArentTheOwner);
+        vm.expectRevert(LockError_YouArentTheOwner);
         lock.withdraw();
     }
 
@@ -34,18 +34,18 @@ contract Lock__Withdraw is LockTest {
     }
 
     /// @dev it should emit Withdrawal event.
-    function testWithdraw__CalledFromOwnerOnTime__Event() external CalledOnTime CalledFromOwner {
+    function test_CalledFromOwnerOnTime_Event() external CalledOnTime CalledFromOwner {
         // We can increase the time to unlockTime.
         vm.warp(unlockTime);
 
         // Run the test.
-        vm.expectEmit(true, true, false, true);
+        vm.expectEmit(true, true, true, true);
         emit Withdrawal(lockedAmount, block.timestamp);
         lock.withdraw();
     }
 
     /// @dev it should transfer the funds to the owner.
-    function testWithdraw__CalledFromOwnerOnTime__TransferFundsToOwner()
+    function test_CalledFromOwnerOnTime_TransferFundsToOwner()
         external
         CalledOnTime
         CalledFromOwner

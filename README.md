@@ -301,6 +301,14 @@ Build the contracts:
 $ forge build
 ```
 
+### Coverage
+
+Get a test coverage report:
+
+```sh
+$ forge coverage
+```
+
 ### Clean
 
 Delete the build artifacts and cache directories:

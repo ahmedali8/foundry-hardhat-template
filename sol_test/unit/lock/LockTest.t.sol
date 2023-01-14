@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.4;
+pragma solidity >=0.8.4 <0.9.0;
 
 import { Errors } from "../../shared/Errors.t.sol";
 import { BaseTest } from "../BaseTest.t.sol";
