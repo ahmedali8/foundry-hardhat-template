@@ -5,9 +5,8 @@ env:
   DOTENV_CONFIG_PATH: "./.env.example"
 
 on:
+  workflow_dispatch:
   pull_request:
-    branches:
-      - "main"
   push:
     branches:
       - "main"
@@ -21,10 +20,8 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: "Install Foundry"
-        uses: "foundry-rs/foundry-toolchain"
-        with:
-          version: "nightly"
+      - name: "Install Foundry and restore the RPC cache, if any"
+        uses: "foundry-rs/foundry-toolchain@v1"
 
       - name: "Install Node.js"
         uses: "actions/setup-node@v3"
@@ -46,9 +43,9 @@ jobs:
       - name: "Hardhat"
         run: |
           echo "
-              /*//////////////////////////////////////////////////////////////
-                                HARDHAT
-              //////////////////////////////////////////////////////////////*/
+            /*//////////////////////////////////////////////////////////////
+                                        HARDHAT
+            //////////////////////////////////////////////////////////////*/
           "
 
       - name: "Compile the contracts and generate the TypeChain bindings"
@@ -57,7 +54,7 @@ jobs:
       - name: "Generate the coverage report"
         run: "yarn coverage"
 
-      - name: "Add coverage summary"
+      - name: "Add Hardhat coverage summary"
         run: |
           echo "## Coverage results" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
@@ -73,6 +70,12 @@ jobs:
       - name: "Show the Foundry config"
         run: "forge config"
 
+      - name: "Generate fuzz seed that changes weekly to avoid burning through RPC allowance"
+        run: >
+          echo "FOUNDRY_FUZZ_SEED=$(
+            echo $(($EPOCHSECONDS - $EPOCHSECONDS % 604800))
+          )" >> $GITHUB_ENV
+
       - name: "Run forge tests"
         run: "forge test"
 
@@ -83,5 +86,5 @@ jobs:
 
       - name: "Add forge test summary"
         run: |
-          echo "## Tests" >> $GITHUB_STEP_SUMMARY
+          echo "## Foundry Tests" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY

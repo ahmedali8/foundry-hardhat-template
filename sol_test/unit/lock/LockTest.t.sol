@@ -18,7 +18,7 @@ abstract contract LockTest is BaseTest, Errors {
 
     /// SETUP FUNCTION ///
 
-    /// @dev A setup function invoked before each test case.
+    /// @dev An optional function invoked before each test case is run
     function setUp() public virtual override {
         super.setUp();
 

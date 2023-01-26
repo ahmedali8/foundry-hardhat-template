@@ -6,7 +6,6 @@ import { LockTest } from "../LockTest.t.sol";
 contract Lock_Withdraw is LockTest {
     /// @dev it should revert.
     function test_RevertWhen_CalledTooSoon() external {
-        // Run the test.
         vm.expectRevert(LockError_YouCantWithdrawYet);
         lock.withdraw();
     }
@@ -15,12 +14,20 @@ contract Lock_Withdraw is LockTest {
         _;
     }
 
-    /// @dev it should revert.
-    function test_RevertWhen_CalledFromAnotherAccount() external CalledOnTime {
-        // We can increase the time to unlockTime.
+    function increaseTimeToUnlockTime() internal {
         vm.warp(unlockTime);
+    }
 
-        address anotherAccount = users[0];
+    /// @dev it should revert.
+    function testFuzz_RevertWhen_CalledFromAnotherAccount(
+        address anotherAccount
+    ) external CalledOnTime {
+        vm.assume(anotherAccount != address(0));
+        vm.assume(anotherAccount != deployer);
+
+        // We can increase the time to unlockTime.
+        increaseTimeToUnlockTime();
+
         // We can change the `msg.sender` to another account.
         changePrank(anotherAccount);
 
@@ -36,7 +43,7 @@ contract Lock_Withdraw is LockTest {
     /// @dev it should emit Withdrawal event.
     function test_CalledFromOwnerOnTime_Event() external CalledOnTime CalledFromOwner {
         // We can increase the time to unlockTime.
-        vm.warp(unlockTime);
+        increaseTimeToUnlockTime();
 
         // Run the test.
         vm.expectEmit(true, true, true, true);
@@ -51,12 +58,11 @@ contract Lock_Withdraw is LockTest {
         CalledFromOwner
     {
         // We can increase the time to unlockTime.
-        vm.warp(unlockTime);
+        increaseTimeToUnlockTime();
 
         uint256 prevLockBalance = address(lock).balance;
         uint256 prevOwnerBalance = deployer.balance;
 
-        // Run the test.
         lock.withdraw();
 
         uint256 actualLockBalance = address(lock).balance;
