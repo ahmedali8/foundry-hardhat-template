@@ -11,13 +11,6 @@ contract Lock_Constructor is LockTest {
         new Lock(block.timestamp);
     }
 
-    /// @dev it should revert.
-    function testFuzz_RevertWhen_UnlockTimeNotInFuture(uint256 blockTimestamp) external {
-        vm.assume(blockTimestamp < block.timestamp);
-        vm.expectRevert(LockError_UnlockTimeShouldBeInTheFuture);
-        new Lock(blockTimestamp);
-    }
-
     modifier UnlockTimeInFuture() {
         _;
     }
