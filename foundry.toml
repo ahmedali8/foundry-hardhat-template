@@ -11,7 +11,7 @@
   optimizer = true
   optimizer_runs = 200
   out = "out"
-  solc = "0.8.17"
+  solc = "0.8.18"
   src = "contracts"
   script = "sol_script"
   test = "sol_test"
