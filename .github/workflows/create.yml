@@ -1,6 +1,6 @@
 name: Create
 
-# env:
+env:
   DOTENV_CONFIG_PATH: "./.env.example"
 
 # The workflow will run only when `use this template` is used
