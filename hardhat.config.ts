@@ -98,11 +98,12 @@ const config: HardhatUserConfig = {
   networks: {
     // LOCAL
     hardhat: { chainId: 31337 },
+    localhost: { chainId: 31337 },
+    ganache: { chainId: 1337, url: "http://127.0.0.1:7545" },
+
     "truffle-dashboard": {
       url: "http://localhost:24012/rpc",
     },
-    ganache: { chainId: 1337, url: "http://127.0.0.1:7545" },
-
     ...getAllNetworkConfigs(),
   },
   paths: {
