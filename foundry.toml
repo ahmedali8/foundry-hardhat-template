@@ -1,6 +1,5 @@
 # Full reference https://github.com/foundry-rs/foundry/tree/master/config
 
-
 [profile.default]
   auto_detect_solc = false
   bytecode_hash = "none"
@@ -11,10 +10,16 @@
   optimizer = true
   optimizer_runs = 200
   out = "out"
+  script = "sol_script"
   solc = "0.8.18"
   src = "contracts"
-  script = "sol_script"
   test = "sol_test"
+
+[profile.lite]
+  fuzz = { runs = 50 }
+  invariant = { runs = 10 }
+  # Speed up compilation and tests during development.
+  optimizer = false
 
 [profile.ci]
   fuzz = { runs = 10_000 }
@@ -36,8 +41,8 @@
 
 [rpc_endpoints]
   ethereum = "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
-  localhost = "http://localhost:8545"
   goerli = "https://goerli.infura.io/v3/${INFURA_API_KEY}"
+  localhost = "http://localhost:8545"
 
   # # ETHEREUM
   # mainnet = "https://mainnet.infura.io/v3/${INFURA_API_KEY}"
