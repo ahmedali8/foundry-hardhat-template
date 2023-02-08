@@ -133,4 +133,4 @@ export const NETWORKS: { readonly [key in NetworkName]: Network } = {
   },
 } as const;
 
-export const DEVELOPMENT_CHAINS = ["hardhat", "localhost", "ganache"] as const;
+export const DEVELOPMENT_CHAINS: string[] = ["hardhat", "localhost", "ganache"];
