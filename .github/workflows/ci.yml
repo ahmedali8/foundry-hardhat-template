@@ -1,8 +1,8 @@
 name: "CI"
 
 env:
-  FOUNDRY_PROFILE: "ci"
   DOTENV_CONFIG_PATH: "./.env.example"
+  FOUNDRY_PROFILE: "ci"
 
 on:
   workflow_dispatch:
@@ -12,7 +12,9 @@ on:
       - "main"
 
 jobs:
-  ci:
+  ### Run Linters ###
+  lint:
+    name: "Run Linters"
     runs-on: "ubuntu-latest"
     steps:
       - name: "Check out the repo"
@@ -32,7 +34,7 @@ jobs:
       - name: "Install the Node.js dependencies"
         run: "yarn install --immutable --inline-builds"
 
-      - name: "Lint solidity code"
+      - name: "Lint the contracts"
         run: "yarn lint:sol"
 
       - name: "Add lint summary"
@@ -40,32 +42,96 @@ jobs:
           echo "## Lint results" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
 
-      - name: "Hardhat"
+  ### Build Contracts ###
+  build:
+    name: "Build Contracts"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v3"
+        with:
+          submodules: "recursive"
+
+      - name: "Install Foundry and restore the RPC cache, if any"
+        uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: "Install Node.js"
+        uses: "actions/setup-node@v3"
+        with:
+          cache: "yarn"
+          node-version: "lts/*"
+
+      - name: "Install the Node.js dependencies"
+        run: "yarn install --immutable --inline-builds"
+
+      - name: "Hardhat: Compile the contracts"
         run: |
-          echo "
-            /*//////////////////////////////////////////////////////////////
-                                        HARDHAT
-            //////////////////////////////////////////////////////////////*/
-          "
+          yarn clean
+          yarn compile
 
-      - name: "Compile the contracts and generate the TypeChain bindings"
-        run: "yarn typechain"
-
-      - name: "Generate the coverage report"
-        run: "yarn coverage"
-
-      - name: "Add Hardhat coverage summary"
+      - name: "Forge: Build the contracts and print their size"
         run: |
-          echo "## Coverage results" >> $GITHUB_STEP_SUMMARY
+          forge --version
+          forge build --sizes
+
+      - name: "Add build summary"
+        run: |
+          echo "## Build result" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
 
-      - name: "Foundry"
+  ### Run Hardhat Tests ###
+  hardhat-test:
+    name: "Run Hardhat Tests"
+    needs: ["lint", "build"]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v3"
+        with:
+          submodules: "recursive"
+
+      - name: "Install Foundry and restore the RPC cache, if any"
+        uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: "Install Node.js"
+        uses: "actions/setup-node@v3"
+        with:
+          cache: "yarn"
+          node-version: "lts/*"
+
+      - name: "Install the Node.js dependencies"
+        run: "yarn install --immutable --inline-builds"
+
+      - name: "Run Hardhat tests"
+        run: "yarn test"
+
+      - name: "Add Hardhat test summary"
         run: |
-          echo "
-            /*//////////////////////////////////////////////////////////////
-                                        FOUNDRY
-            //////////////////////////////////////////////////////////////*/
-          "
+          echo "## Hardhat Tests result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
+
+  ### Run Forge Tests ###
+  forge-test:
+    name: "Run Forge Tests"
+    needs: ["lint", "build"]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v3"
+        with:
+          submodules: "recursive"
+
+      - name: "Install Foundry and restore the RPC cache, if any"
+        uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: "Install Node.js"
+        uses: "actions/setup-node@v3"
+        with:
+          cache: "yarn"
+          node-version: "lts/*"
+
+      - name: "Install the Node.js dependencies"
+        run: "yarn install --immutable --inline-builds"
 
       - name: "Show the Foundry config"
         run: "forge config"
@@ -79,12 +145,72 @@ jobs:
       - name: "Run forge tests"
         run: "forge test"
 
-      - name: "Check that the contracts are each under 24kB"
+      - name: "Add Forge test summary"
         run: |
-          forge --version
-          forge build --sizes
+          echo "## Forge Tests result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
 
-      - name: "Add forge test summary"
+  ### Run Hardhat Coverage ###
+  hardhat-coverage:
+    name: "Run Hardhat Coverage"
+    needs: ["lint", "build"]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v3"
+        with:
+          submodules: "recursive"
+
+      - name: "Install Foundry and restore the RPC cache, if any"
+        uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: "Install Node.js"
+        uses: "actions/setup-node@v3"
+        with:
+          cache: "yarn"
+          node-version: "lts/*"
+
+      - name: "Install the Node.js dependencies"
+        run: "yarn install --immutable --inline-builds"
+
+      - name: "Generate the TypeChain bindings"
+        run: "yarn typechain"
+
+      - name: "Generate the coverage report"
+        run: "yarn coverage"
+
+      - name: "Add Hardhat coverage summary"
         run: |
-          echo "## Foundry Tests" >> $GITHUB_STEP_SUMMARY
+          echo "## Hardhat Coverage results" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
+
+  ### Run Forge Coverage ###
+  forge-coverage:
+    name: "Run Forge Coverage"
+    needs: ["lint", "build"]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v3"
+        with:
+          submodules: "recursive"
+
+      - name: "Install Foundry and restore the RPC cache, if any"
+        uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: "Install Node.js"
+        uses: "actions/setup-node@v3"
+        with:
+          cache: "yarn"
+          node-version: "lts/*"
+
+      - name: "Install the Node.js dependencies"
+        run: "yarn install --immutable --inline-builds"
+
+      - name: "Run coverage with lcov output"
+        run: "forge coverage --report lcov"
+
+      - name: "Add Forge coverage summary"
+        run: |
+          echo "## Forge Coverage results" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
