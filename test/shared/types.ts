@@ -1,4 +1,4 @@
-import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
+import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 import type { Lock } from "../../types/Lock";
 
