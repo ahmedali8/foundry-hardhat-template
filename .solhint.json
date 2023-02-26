@@ -11,13 +11,14 @@
     "func-visibility": ["error", { "ignoreConstructors": true }],
     "max-line-length": ["error", 120],
     "not-rely-on-time": "off",
+    "named-parameters-mapping": "warn",
+    "no-console": "off",
     "prettier/prettier": [
       "warn",
       {
         "endOfLine": "auto"
       }
     ],
-    "reason-string": ["warn", { "maxLength": 64 }],
     "var-name-mixedcase": "off"
   }
 }
