@@ -1,4 +1,4 @@
-name: Create
+name: "Create"
 
 env:
   DOTENV_CONFIG_PATH: "./.env.example"
@@ -9,9 +9,9 @@ on:
 
 jobs:
   create:
-    # We will only run this action when the repository isn't the template repository
-    # Reference https://docs.github.com/en/actions/learn-github-actions/contexts
-    # Reference https://docs.github.com/en/actions/learn-github-actions/expressions
+    # We only run this action when the repository isn't the template repository. References:
+    # - https://docs.github.com/en/actions/learn-github-actions/contexts
+    # - https://docs.github.com/en/actions/learn-github-actions/expressions
     if: ${{ !github.event.repository.is_template }}
 
     runs-on: ubuntu-latest
@@ -22,11 +22,25 @@ jobs:
         uses: "actions/checkout@v3"
 
       - name: "Update package.json"
-        run: ./.github/scripts/rename.sh "$GITHUB_REPOSITORY" "$GITHUB_REPOSITORY_OWNER"
+        env:
+          GITHUB_REPOSITORY_DESCRIPTION: ${{ github.event.repository.description }}
+        run:
+          ./.github/scripts/rename.sh "$GITHUB_REPOSITORY" "$GITHUB_REPOSITORY_OWNER"
+          "$GITHUB_REPOSITORY_DESCRIPTION"
 
       - name: "Add rename summary"
         run: |
           echo "## Commit results" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
+
+      - name: "Remove `rename.sh` and `create.yml`"
+        run: |
+          rm -f "./.github/scripts/rename.sh"
+          rm -f "./.github/workflows/create.yml"
+
+      - name: "Add remove summary"
+        run: |
+          echo "## Remove result" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
 
       - name: "Update commit"
