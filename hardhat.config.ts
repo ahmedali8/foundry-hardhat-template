@@ -100,6 +100,7 @@ const config: HardhatUserConfig = {
     hardhat: { chainId: 31337 },
     localhost: { chainId: 31337 },
     ganache: { chainId: 1337, url: "http://127.0.0.1:7545" },
+    anvil: { chainId: 31337, url: "http://127.0.0.1:8545" },
 
     "truffle-dashboard": {
       url: "http://localhost:24012/rpc",
@@ -122,7 +123,7 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: "0.8.18",
+        version: "0.8.19",
         settings: {
           metadata: {
             // Not including the metadata hash

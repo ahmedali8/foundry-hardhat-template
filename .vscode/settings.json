@@ -13,7 +13,7 @@
   "search.exclude": { "lib": true },
   "solidity.linter": "solhint",
   "solidity.defaultCompiler": "remote",
-  "solidity.compileUsingRemoteVersion": "v0.8.18",
+  "solidity.compileUsingRemoteVersion": "v0.8.19",
   "solidity.enabledAsYouTypeCompilationErrorCheck": true,
   "solidity.validationDelay": 1500,
   "solidity.packageDefaultDependenciesContractsDirectory": "contracts",
