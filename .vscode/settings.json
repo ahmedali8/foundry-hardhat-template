@@ -9,6 +9,7 @@
   "files.associations": {
     ".gas-snapshot": "julia"
   },
+  "npm.exclude": "**/lib/**",
   "search.exclude": { "lib": true },
   "solidity.linter": "solhint",
   "solidity.defaultCompiler": "remote",
