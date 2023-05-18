@@ -309,25 +309,18 @@ $ forge clean
 Deploy to Anvil:
 
 ```sh
+# Spin up an anvil local node
 $ anvil
-```
 
-Update your .env file with a private key given to you by Anvil.
-
-```sh
-# To load the variables in the .env file
-$ source .env
-
-# To deploy and verify our contract
+# On another terminal
 $ forge script sol_script/DeployLock.s.sol:DeployLock \
   --fork-url http://localhost:8545 \
   --broadcast \
-  --private-key $PRIVATE_KEY \
   -vvvv
 ```
 
-For this script to work, you need to have a `MNEMONIC` environment variable set to a valid
-[BIP39 mnemonic](https://iancoleman.io/bip39/).
+For this script to work, you need to have a `MNEMONIC` or `PRIVATE_KEY` environment variable set to
+a valid [BIP39 mnemonic](https://iancoleman.io/bip39/) or private key, respectively.
 
 For instructions on how to deploy to a testnet or mainnet, check out the
 [Solidity Scripting tutorial](https://book.getfoundry.sh/tutorials/solidity-scripting.html).
