@@ -89,6 +89,8 @@ const config: HardhatUserConfig = {
     coinmarketcap: process.env.COIN_MARKET_CAP_API_KEY || undefined,
     excludeContracts: [],
     src: "./contracts",
+    maxMethodDiff: 10,
+    maxDeploymentDiff: 10,
   },
   namedAccounts: {
     deployer: {
@@ -101,7 +103,6 @@ const config: HardhatUserConfig = {
     localhost: { chainId: 31337 },
     ganache: { chainId: 1337, url: "http://127.0.0.1:7545" },
     anvil: { chainId: 31337, url: "http://127.0.0.1:8545" },
-
     "truffle-dashboard": {
       url: "http://localhost:24012/rpc",
     },
@@ -142,6 +143,7 @@ const config: HardhatUserConfig = {
               "*": ["storageLayout"],
             },
           },
+          evmVersion: "paris",
         },
       },
     ],
