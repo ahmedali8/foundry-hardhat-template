@@ -13,7 +13,7 @@ async function main() {
   const args: any[] = ["878979"];
 
   // You don't want to verify on localhost
-  if (chainId != 31337 && chainId != 1337) {
+  if (chainId != 31337n && chainId != 1337n) {
     await verifyContract({
       contractPath,
       contractAddress,

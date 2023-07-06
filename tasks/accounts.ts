@@ -1,10 +1,11 @@
 import { task } from "hardhat/config";
 
 import { fromWei } from "../utils/format";
+import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 
 task("accounts", "Prints the list of accounts").setAction(async (_taskArgs, hre) => {
   const { ethers } = hre;
-  const accounts = await ethers.getSigners();
+  const accounts: HardhatEthersSigner[] = await ethers.getSigners();
 
   interface AccountsArray {
     address: string;
@@ -14,7 +15,7 @@ task("accounts", "Prints the list of accounts").setAction(async (_taskArgs, hre)
 
   for (const account of accounts) {
     const address = account.address;
-    const balanceInETH = fromWei(await account.getBalance());
+    const balanceInETH = fromWei(await account.provider.getBalance(address));
 
     accountsArray.push({
       address,

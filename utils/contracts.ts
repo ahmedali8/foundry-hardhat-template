@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Signer } from "@ethersproject/abstract-signer";
-import type { Contract } from "@ethersproject/contracts";
+
 import chalk from "chalk";
 import { ethers } from "hardhat";
 
 import { fromWei } from "./format";
 import { getExtraGasInfo } from "./misc";
+import { BaseContract, Contract, Signer } from "ethers";
 
 /**
  * Gets a contract instance for the given contract name or ABI, address, and signer.
  *
- * @param {string | any[]} contractNameOrAbi - The name or ABI of the contract.
- * @param {string} address - The address of the contract.
- * @param {Signer | undefined} signer - The signer to be used for the contract instance.
- * @returns {Promise<T>} A promise that resolves to the contract instance of type T.
+ * @param contractNameOrAbi - The name or ABI of the contract.
+ * @param address - The address of the contract.
+ * @param signer - The signer to be used for the contract instance.
+ * @returns A promise that resolves to the contract instance of type T.
  */
 export async function getContractInstance<T extends Contract = Contract>(
   contractNameOrAbi: string | any[],
@@ -26,20 +26,20 @@ export async function getContractInstance<T extends Contract = Contract>(
 /**
  * Gets an array of contract instances for the given contract names or ABIs, addresses, and signers.
  *
- * @param {string[] | any[]} contractNameOrAbi - An array of contract names or ABIs.
- * @param {string[]} addresses - An array of contract addresses.
- * @param {Signer[] | undefined} signers - An array of signers to be used for the contract instances.
- * @returns {Promise<T[] | null>} A promise that resolves to an array of contract instances of type T, or null if the length of contract names/ABIs, addresses, and signers is different.
+ * @param contractNameOrAbi - An array of contract names or ABIs.
+ * @param addresses - An array of contract addresses.
+ * @param signers - An array of signers to be used for the contract instances.
+ * @returns A promise that resolves to an array of contract instances of type T, or null if the length of contract names/ABIs, addresses, and signers is different.
  */
 export async function getContractInstances<T extends Contract = Contract>(
   contractNameOrAbi: string[] | any[],
   addresses: string[],
   signers?: Signer[]
 ): Promise<T[] | null> {
-  if (contractNameOrAbi.length !== addresses.length) {
-    return null;
-  }
-  if (signers && contractNameOrAbi.length !== signers.length) {
+  if (
+    contractNameOrAbi.length !== addresses.length ||
+    (signers && contractNameOrAbi.length !== signers.length)
+  ) {
     return null;
   }
 
@@ -60,18 +60,11 @@ export async function getContractInstances<T extends Contract = Contract>(
 /**
  * Logs information about the signer, network, and balance before deploying a contract.
  *
- * @param {Object} options - The options object.
- * @property {string} options.signerAddress - The address of the signer.
- * @property {string} options.contractName - The name of the contract to be deployed.
- * @returns {Promise<void>} A promise that resolves when the information has been logged.
+ * @param signerAddress - The address of the signer.
+ * @param contractName - The name of the contract to be deployed.
+ * @returns A promise that resolves when the information has been logged.
  */
-export async function preDeploy({
-  signerAddress,
-  contractName,
-}: {
-  signerAddress: string;
-  contractName: string;
-}): Promise<void> {
+export async function preDeploy(signerAddress: string, contractName: string): Promise<void> {
   const { chainId, name } = await ethers.provider.getNetwork();
   const ethBalance = await ethers.provider.getBalance(signerAddress);
 
@@ -86,31 +79,31 @@ export async function preDeploy({
 }
 
 /**
- * postDeploy is a function that logs the deployment of a contract.
+ * Logs information about the deployment of a contract.
  *
- * @param {Object} options - The options object.
- * @property {string} options.contractName - the name of the deployed contract.
- * @property {T extends Contract} options.contract - the contract instance.
- * @returns {Promise<T>} A promise that resolves to the contract instance that has been deployed.
+ * @param contractName - The name of the deployed contract.
+ * @param contract - The contract instance.
+ * @returns A promise that resolves to the contract instance that has been deployed.
  */
-export async function postDeploy<T extends Contract = Contract>({
-  contractName,
-  contract,
-}: {
-  contractName: string;
-  contract: T;
-}): Promise<T> {
+export async function postDeploy<T extends BaseContract = BaseContract>(
+  contractName: string,
+  contract: T
+): Promise<T> {
   // Wait for the contract to be deployed
-  await contract.deployed();
+  await contract.waitForDeployment();
 
   // Get extra gas information of the deployment transaction
   let extraGasInfo = "";
-  if (contract && contract.deployTransaction) {
-    extraGasInfo = (await getExtraGasInfo(contract.deployTransaction)) ?? "";
+  const deploymentTransaction = contract.deploymentTransaction();
+
+  if (deploymentTransaction) {
+    extraGasInfo = (await getExtraGasInfo(deploymentTransaction)) ?? "";
   }
 
+  const contractAddress = await contract.getAddress();
+
   // Log the deployment information
-  console.log(" 📄", chalk.cyan(contractName), "deployed to:", chalk.magenta(contract.address));
+  console.log(" 📄", chalk.cyan(contractName), "deployed to:", chalk.magenta(contractAddress));
   console.log(" ⛽", chalk.grey(extraGasInfo));
 
   // Return the contract instance

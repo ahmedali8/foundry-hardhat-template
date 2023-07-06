@@ -1,156 +1,176 @@
-import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
-import { formatUnits } from "@ethersproject/units";
+import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumberish, formatUnits } from "ethers";
 import { fromBn, toBn } from "evm-bn";
 
 /**
- * Return the `labelValue` converted to string as Billions, Millions, Thousands etc.
+ * Converts a number to a string representation in the International Currency System (e.g., Billions, Millions, Thousands).
  *
- * @param labelValue number.
- * @return string value or undefined.
+ * @param labelValue - The number to be converted.
+ * @returns The string value in the International Currency System, or undefined if the input is falsy.
  */
 export function convertToInternationalCurrencySystem(labelValue: number): string | undefined {
   if (!labelValue) {
     return undefined;
   }
-  // Nine Zeroes for Billions
-  if (Math.abs(Number(labelValue)) >= 1000000000) {
-    return (Math.abs(Number(labelValue)) / 1000000000).toFixed(2).replace(/\.?0+$/, "") + " B";
-  }
-  // Six Zeroes for Millions
-  else if (Math.abs(Number(labelValue)) >= 1000000) {
-    return (Math.abs(Number(labelValue)) / 1000000).toFixed(2).replace(/\.?0+$/, "") + " M";
-  }
-  // Three Zeroes for Thousands
-  else if (Math.abs(Number(labelValue)) >= 1000) {
-    return (Math.abs(Number(labelValue)) / 1000).toFixed(2).replace(/\.?0+$/, "") + " K";
+
+  const absValue = Math.abs(labelValue);
+
+  if (absValue >= 1e9) {
+    // Billion
+    return (absValue / 1e9).toFixed(2).replace(/\.?0+$/, "") + " B";
+  } else if (absValue >= 1e6) {
+    // Million
+    return (absValue / 1e6).toFixed(2).replace(/\.?0+$/, "") + " M";
+  } else if (absValue >= 1e3) {
+    // Thousand
+    return (absValue / 1e3).toFixed(2).replace(/\.?0+$/, "") + " K";
   } else {
-    return Math.abs(Number(labelValue)).toString();
+    return absValue.toString();
   }
 }
 
 /**
- * Return the `value` converted to string and removing the end unnecessary zeros.
+ * Returns the string representation of a number, removing unnecessary trailing zeros.
  *
- * @param value number.
- * @return string value or undefined.
+ * @param value - The number to be converted.
+ * @returns The string value with trailing zeros removed.
  */
-export function omitEndZeros(value: number): string | undefined {
-  if (!value) return undefined;
+export function removeTrailingZeros(value: number): string {
   return value.toString().replace(/\.?0+$/, "");
 }
 
 /**
- * Return the `value` converted to BigNumber.
+ * Returns the string representation of a number with a specified precision.
  *
- * @param value string value preferred.
- * @return BigNumber value
+ * @param value - The number to be converted.
+ * @param precision - The number of decimal places to include in the string representation.
+ * @returns The string value with the specified precision.
  */
-export function toBN(value: string | number | bigint): BigNumber {
-  return BigNumber.from(value);
-}
-
-/**
- * Return the `value` converted to string.
- *
- * @param value number.
- * @param precision fractionDecimals.
- * @return string value or undefined.
- */
-export function numToFix(value: number, precision: number = 4): string | undefined {
-  if (!value) return undefined;
-
+export function numWithPrecision(value: number, precision: number = 4): string {
   return value.toFixed(precision);
 }
 
 /**
- * Return the `gasPrice` converted to gwei.
- * formatUnits(value: BigNumberish, unitName?: BigNumberish | undefined): string
- * BigNumberish -> string, BigNumber, number, BytesLike or BigInt.`https://docs.ethers.io/v5/api/utils/bignumber/#BigNumberish`
+ * Converts a gas price value to gwei.
  *
- * @param gasPrice BigNumberish value to be converted, preferred is BigNumber.
- * @return string value
+ * formatUnits(value: BigNumberish, unit?: string | Numeric | undefined): string
+ * BigNumberish -> string | Numeric
+ * Numeric -> number | bigint
+ *
+ * @param gasPrice - The gas price value to be converted.
+ * @returns The string value of the gas price in gwei.
  */
 export function toGwei(gasPrice: BigNumberish): string {
   return formatUnits(gasPrice, "gwei");
 }
 
 /**
- * Return the `value` converted to BigNumber wei.
- * parseUnits(value: string, unitName?: BigNumberish | undefined): BigNumber
- * BigNumberish -> string, BytesLike, BigNumber, number or BigInt.`https://docs.ethers.io/v5/api/utils/bignumber/#BigNumberish`
+ * Converts a value to wei.
  *
- * @param value the string value to be converted.
- * @param decimals decimal value or BigNumberish.
- * @return BigNumber value or undefined.
+ * parseUnits(value: string, unit?: string | Numeric): bigint
+ * BigNumberish -> string | Numeric
+ * Numeric -> number | bigint
+ *
+ * @param value - The value to be converted.
+ * @param decimals - The number of decimal places in the value.
+ * @returns The bigint value in wei.
  */
-export function toWei(value: string, decimals: number = 18): BigNumber {
-  return toBn(value, decimals);
+export function toWei(value: string, decimals: number = 18): bigint {
+  return toBn(value, decimals).toBigInt();
 }
 
 /**
- * Return the `value` converted to string from wei.
- * formatUnits(value: BigNumberish, unitName?: BigNumberish | undefined): string
- * BigNumberish -> string, BigNumber, number, BytesLike or BigInt.`https://docs.ethers.io/v5/api/utils/bignumber/#BigNumberish`
+ * Converts a value from wei to a string representation.
  *
- * @param value BigNumber value to be converted.
- * @param decimals decimal value or BigNumberish.
- * @return string value.
+ * formatUnits(value: BigNumberish, unit?: string | Numeric | undefined): string
+ * BigNumberish -> string | Numeric
+ * Numeric -> number | bigint
+ *
+ * @param value - The value to be converted from wei.
+ * @param decimals - The number of decimal places in the value.
+ * @returns The string representation of the value.
  */
-export function fromWei(value: BigNumber, decimals: number = 18): string {
-  return fromBn(value, decimals);
+export function fromWei(value: BigNumberish, decimals: number = 18): string {
+  return fromBn(BigNumber.from(value), decimals);
 }
 
 /**
- * Return the `value` converted to number from wei.
- * BigNumberish -> string, BigNumber, number, BytesLike or BigInt.`https://docs.ethers.io/v5/api/utils/bignumber/#BigNumberish`
+ * Converts a value from wei to a floating-point number.
  *
- * @param value BigNumber value to be converted.
- * @param decimals decimal value or BigNumberish.
- * @return number value or undefined.
+ * BigNumberish -> string | Numeric
+ * Numeric -> number | bigint
+ *
+ * @param value - The value to be converted from wei.
+ * @param decimals - The number of decimal places in the value.
+ * @returns The floating-point number representation of the value.
  */
-export function fromWeiToNum(value: BigNumber, decimals: number = 18): number | undefined {
-  if (!value) return undefined;
-
-  const fromWeiString = fromWei(value, decimals) ?? "";
+export function fromWeiToNum(value: BigNumberish, decimals: number = 18): number {
+  const fromWeiString = fromWei(value, decimals);
   return parseFloat(fromWeiString);
 }
 
 /**
- * Return the `value` converted to fixed point number.
- * BigNumberish -> string, BigNumber, number, BytesLike or BigInt.`https://docs.ethers.io/v5/api/utils/bignumber/#BigNumberish`
+ * Converts a value from wei to a fixed-point number with a specified precision.
  *
- * @param value BigNumber value to be converted.
- * @param decimals decimal value or BigNumberish.
- * @param precision fractionDecimals.
- * @return number value or undefined.
+ * BigNumberish -> string | Numeric
+ * Numeric -> number | bigint
+ *
+ * @param value - The value to be converted from wei.
+ * @param decimals - The number of decimal places in the value.
+ * @param precision - The number of decimal places to include in the fixed-point number.
+ * @returns The fixed-point number representation of the value.
  */
-export function fromWeiToFixedNum(
-  value: BigNumber,
+export function fromWeiTodNumWithPrecision(
+  value: BigNumberish,
   decimals: number = 18,
   precision: number = 4
-): number | undefined {
-  if (!value) return undefined;
-
-  const fromWeiNum = fromWeiToNum(value, decimals) ?? 0;
-  const fromWeiNumToFixed = numToFix(fromWeiNum, precision) ?? "";
+): number {
+  const fromWeiNum = fromWeiToNum(value, decimals);
+  const fromWeiNumToFixed = numWithPrecision(fromWeiNum, precision);
 
   return parseFloat(fromWeiNumToFixed);
 }
 
 /**
- * Calculates percentage according to `bn` and `percent`.
- * @param {*} bn bignumber
- * @param {*} percent percentage value
- * @returns BigNumber
+ * Calculates the percentage of a BigNumber value.
+ *
+ * @param bn - The BigNumber value.
+ * @param percent - The percentage value.
+ * @returns The calculated percentage as a BigNumber.
  */
-export function calculatePercentage(bn: BigNumber, percent: number): BigNumber {
-  return bn.mul(percent).div("100");
+export function calculatePercentageInBn(bn: BigNumber, percent: number): BigNumber {
+  return bn.mul(percent).div(100);
 }
 
-export const randomInteger = (min: number, max: number) => {
+/**
+ * Calculates the percentage of a bigint value.
+ *
+ * @param bn - The bigint value.
+ * @param percent - The percentage value.
+ * @returns The calculated percentage as a bigint.
+ */
+export function calculatePercentageInBi(bn: bigint, percent: number): bigint {
+  return (bn * BigInt(percent)) / 100n;
+}
+
+/**
+ * Generates a random integer between a minimum and maximum value (inclusive).
+ *
+ * @param min - The minimum value.
+ * @param max - The maximum value.
+ * @returns The random integer.
+ */
+export const randomInteger = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const randomNumber = (min: number, max: number) => {
+/**
+ * Generates a random number between a minimum and maximum value.
+ *
+ * @param min - The minimum value.
+ * @param max - The maximum value.
+ * @returns The random number.
+ */
+export const randomNumber = (min: number, max: number): number => {
   return Math.random() * (max - min) + min;
 };
