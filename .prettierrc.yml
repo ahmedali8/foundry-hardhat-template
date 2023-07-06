@@ -4,6 +4,8 @@ proseWrap: "always"
 singleQuote: false
 tabWidth: 2
 trailingComma: "es5"
+plugins:
+  - "@trivago/prettier-plugin-sort-imports"
 
 overrides:
   - files: "*.sol"
