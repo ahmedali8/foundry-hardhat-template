@@ -11,6 +11,7 @@ contract Lock {
     event Withdrawal(uint256 amount, uint256 when);
 
     constructor(uint256 _unlockTime) payable {
+        // solhint-disable-next-line reason-string
         require(block.timestamp < _unlockTime, "Unlock time should be in the future");
 
         unlockTime = _unlockTime;

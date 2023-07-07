@@ -24,7 +24,7 @@ A Foundry + Hardhat based template for developing Solidity smart contracts, with
   deploy smart contracts
 - [Forge Std](https://github.com/foundry-rs/forge-std): collection of helpful contracts and
   cheatcodes for testing
-- [Solhint](https://github.com/protofire/solhint): code linter
+- [Solhint Community](https://github.com/solhint-community/solhint-community): code linter
 - [Prettier Plugin Solidity](https://github.com/prettier-solidity/prettier-plugin-solidity): code
   formatter
 
