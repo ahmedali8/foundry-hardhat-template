@@ -1,5 +1,5 @@
+import type { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { time } from "@nomicfoundation/hardhat-network-helpers";
-import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { ethers } from "hardhat";
 
 import type { Lock } from "../../../types/Lock";
@@ -25,6 +25,7 @@ export async function lockFixture(): Promise<{
   const args: DeployArgs = [unlockTime, { value: lockedAmount }];
 
   const lock: Lock = (await LockFactory.connect(deployer).deploy(...args)) as Lock;
+  await lock.waitForDeployment();
 
   return { lock, unlockTime, lockedAmount };
 }

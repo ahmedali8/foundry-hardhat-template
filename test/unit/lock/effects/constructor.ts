@@ -19,9 +19,9 @@ export default function shouldBehaveLikeConstructor(): void {
 
   context("when unlockTime is in future", function () {
     it("retrieves correct lockedAmount", async function () {
-      expect(await ethers.provider.getBalance(this.contracts.lock.address)).to.equal(
-        this.lockedAmount
-      );
+      const address = await this.contracts.lock.getAddress();
+      const balance = await ethers.provider.getBalance(address);
+      expect(balance).to.equal(this.lockedAmount);
     });
   });
 }
