@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import chalk from "chalk";
+import { BaseContract, Contract, Signer } from "ethers";
 import { ethers } from "hardhat";
 
 import { fromWei } from "./format";
 import { getExtraGasInfo } from "./misc";
-import { BaseContract, Contract, Signer } from "ethers";
 
 /**
  * Gets a contract instance for the given contract name or ABI, address, and signer.

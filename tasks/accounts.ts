@@ -1,7 +1,7 @@
+import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 import { task } from "hardhat/config";
 
 import { fromWei } from "../utils/format";
-import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 
 task("accounts", "Prints the list of accounts").setAction(async (_taskArgs, hre) => {
   const { ethers } = hre;

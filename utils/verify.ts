@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import type { TransactionResponse } from "ethers";
 import { run } from "hardhat";
 
 import { delayLog } from "./misc";
-import type { TransactionResponse } from "ethers";
 
 /**
  * Waits for the specified number of confirmations for a given transaction.

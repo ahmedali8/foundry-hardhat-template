@@ -158,7 +158,6 @@ const config: HardhatUserConfig = {
     // Defaults to "test"
     outDirName: "test",
   },
-
   typechain: {
     outDir: "types",
     target: "ethers-v6",
