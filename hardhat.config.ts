@@ -1,3 +1,4 @@
+import "@nomicfoundation/hardhat-foundry";
 import "@nomicfoundation/hardhat-toolbox";
 import "@primitivefi/hardhat-dodoc";
 import { config as dotenvConfig } from "dotenv";
