@@ -37,16 +37,17 @@ yarn-error.log*
 !.yarn/versions
 
 # Hardhat files
-**/flattened
-**/build
-**/artifacts
-**/cache
+/flattened
+/build
+/artifacts
+/cache
 .deps
-**/types
+/types
+/cache_hardhat
 
 # Foundry files
-**/foundry_cache
-**/out
+/foundry_cache
+/out
 !/broadcast
 /broadcast/*
 /broadcast/*/31337/
@@ -54,14 +55,14 @@ yarn-error.log*
 # solidity-coverage directory and output file
 coverage
 coverage.json
-**/.coverage_artifacts
-**/.coverage_cache
-**/.coverage_contracts
+/.coverage_artifacts
+/.coverage_cache
+/.coverage_contracts
 
 # Ignore flattened files
 flattened.sol
 
 # Miscellaneous files
-**/storageLayout
+/storageLayout
 *.html
 lcov.info
