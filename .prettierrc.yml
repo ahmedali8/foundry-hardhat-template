@@ -8,11 +8,6 @@ plugins:
   - "@trivago/prettier-plugin-sort-imports"
 
 overrides:
-  - files: "*.sol"
-    options:
-      tabWidth: 4
-      useTabs: false
-      bracketSpacing: true
   - files: "*.ts"
     options:
       importOrder: ["<THIRD_PARTY_MODULES>", "^[./]"]

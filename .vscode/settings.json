@@ -1,28 +1,21 @@
 {
+  "[solidity]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "dotenv.enableAutocloaking": true,
   "editor.rulers": [100],
   "editor.formatOnSave": true,
   "evenBetterToml.formatter.arrayAutoExpand": true,
   "evenBetterToml.formatter.indentEntries": true,
   "evenBetterToml.formatter.indentTables": true,
   "evenBetterToml.formatter.reorderKeys": true,
-  "dotenv.enableAutocloaking": true,
   "files.associations": {
     ".gas-snapshot": "julia"
   },
   "npm.exclude": "**/lib/**",
-  "search.exclude": { "lib": true },
-  "solidity.linter": "solhint",
-  "solidity.defaultCompiler": "remote",
-  "solidity.compileUsingRemoteVersion": "v0.8.19",
-  "solidity.enabledAsYouTypeCompilationErrorCheck": true,
-  "solidity.validationDelay": 1500,
-  "solidity.packageDefaultDependenciesContractsDirectory": "contracts",
-  "solidity.packageDefaultDependenciesDirectory": "'lib', 'node_modules'",
-  "solidity.formatter": "prettier",
-  "[solidity]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[toml]": {
-    "editor.defaultFormatter": "tamasfe.even-better-toml"
-  }
+  "search.exclude": { "**/node_modules": true, "lib": true },
+  "solidity.formatter": "forge"
 }
