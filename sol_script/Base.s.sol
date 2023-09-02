@@ -23,14 +23,15 @@ abstract contract BaseScript is Script {
     /// - Otherwise, derive the broadcaster address from $MNEMONIC.
     /// - If $MNEMONIC is not defined, default to a test mnemonic.
     ///
-    /// The use case for $ETH_FROM is to specify the broadcaster key and its address via the command line.
+    /// The use case for $ETH_FROM is to specify the broadcaster key and its address via the command
+    /// line.
     constructor() {
         address from = vm.envOr({ name: "ETH_FROM", defaultValue: address(0) });
         if (from != address(0)) {
             broadcaster = from;
         } else {
             mnemonic = vm.envOr({ name: "MNEMONIC", defaultValue: TEST_MNEMONIC });
-            (broadcaster, ) = deriveRememberKey({ mnemonic: mnemonic, index: 0 });
+            (broadcaster,) = deriveRememberKey({ mnemonic: mnemonic, index: 0 });
         }
     }
 

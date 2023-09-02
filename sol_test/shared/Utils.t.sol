@@ -35,9 +35,7 @@ abstract contract Utils is Test {
 
     /// @dev Create named user with `bal` balance
     function createNamedUser(string memory name, uint256 bal) internal returns (address payable) {
-        address payable user = payable(
-            address(uint160(uint256(keccak256(abi.encodePacked(name)))))
-        );
+        address payable user = payable(address(uint160(uint256(keccak256(abi.encodePacked(name))))));
         vm.label(user, name);
         vm.deal(user, bal);
         return user;

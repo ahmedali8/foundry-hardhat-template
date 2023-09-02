@@ -19,9 +19,10 @@ contract Lock_Withdraw is LockTest {
     }
 
     /// @dev it should revert.
-    function testFuzz_RevertWhen_CalledFromAnotherAccount(
-        address anotherAccount
-    ) external CalledOnTime {
+    function testFuzz_RevertWhen_CalledFromAnotherAccount(address anotherAccount)
+        external
+        CalledOnTime
+    {
         vm.assume(anotherAccount != address(0));
         vm.assume(anotherAccount != deployer);
 

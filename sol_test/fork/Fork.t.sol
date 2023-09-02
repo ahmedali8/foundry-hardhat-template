@@ -10,7 +10,8 @@ interface IERC20 {
 /// @dev See the "Writing Tests" section in the Foundry Book if this is your first time with Forge.
 /// https://book.getfoundry.sh/forge/writing-tests
 contract ForkTest is BaseTest {
-    /// @dev Test that runs against a fork of Ethereum Mainnet. You need to set `ALCHEMY_API_KEY` in your environment
+    /// @dev Test that runs against a fork of Ethereum Mainnet. You need to set `ALCHEMY_API_KEY` in
+    /// your environment
     /// for this test to run - you can get an API key for free at https://alchemy.com.
     function testFork_Example() external {
         string memory alchemyApiKey = vm.envOr("ALCHEMY_API_KEY", string(""));
