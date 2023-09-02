@@ -313,7 +313,7 @@ Deploy to Anvil:
 $ anvil
 
 # On another terminal
-$ forge script sol_script/DeployLock.s.sol:DeployLock \
+$ forge script scripts/foundry/DeployLock.s.sol:DeployLock \
   --fork-url http://localhost:8545 \
   --broadcast \
   -vvvv

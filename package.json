@@ -16,7 +16,7 @@
     "deploy:network": "yarn deploy:hardhat-deploy --network",
     "fork": "hardhat node --network hardhat --fork https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
     "lint": "yarn lint:sol && yarn lint:ts && yarn prettier:check",
-    "lint:sol": "forge fmt --check && yarn solhint \"{sol_script,contracts,sol_test}/**/*.sol\"",
+    "lint:sol": "forge fmt --check && yarn solhint \"{script,contracts,test}/**/*.sol\"",
     "lint:ts": "eslint --ignore-path ./.eslintignore --ext .js,.ts .",
     "networks": "hardhat networks",
     "postinstall": "DOTENV_CONFIG_PATH=./.env.example yarn typechain",
