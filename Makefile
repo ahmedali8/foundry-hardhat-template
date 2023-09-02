@@ -1,17 +1,43 @@
-# Include .env file and export its env vars
+# Include .env file and export its environment variables
 # (-include to ignore error if it does not exist)
 -include .env
 
 # Update dependencies
-setup								:; make update-libs ; make create-env ; make install-nodejs-deps
-update-libs					:; git submodule update --init --recursive # equivalent to: forge install
-install-nodejs-deps	:; yarn install --immutable
+setup:
+	@make update-libs
+	@make create-env
+	@make install-nodejs-deps
 
-# Create .env file, if not exists, with .env.example content
-create-env					:; [ ! -f ./.env ] && (echo "copying .env.example to .env" && cp ./.env.example ./.env) || echo ".env exists"
+update-libs:
+	@git submodule update --init --recursive # equivalent to: forge install
+
+install-nodejs-deps:
+	@yarn install --immutable
+
+# Create .env file if it doesn't exist, using .env.example as a template
+create-env:
+	@[ ! -f ./.env ] && (echo "Copying .env.example to .env" && cp ./.env.example ./.env) || echo ".env exists"
 
 # Test
-test-all						:; yarn test ; forge test
+test-all:
+	@yarn test
+	@forge test
 
-# # use the "@" to hide the command from your shell
-# deploy-goerli :; @forge script script/${contract}.s.sol:Deploy${contract} --rpc-url ${GOERLI_RPC_URL}  --private-key ${PRIVATE_KEY} --broadcast --verify --etherscan-api-key ${ETHERSCAN_API_KEY}  -vvvv
+# Foundry Coverage
+foundry-report:
+	@bash ./shell/foundry-coverage.sh
+
+# Deploy (use "@" to hide the command from your shell)
+deploy-contract:
+	@read -p "Enter contract name: " contract; \
+	read -p "Enter chain: " chain; \
+	if [ -n "$$contract" ] && [ -n "$$chain" ]; then \
+		echo "Deploying contract: $$contract on chain: $$chain"; \
+		forge script scripts/foundry/$$contract.s.sol \
+		--broadcast \
+		--rpc-url "$$chain" \
+		--verify \
+		-vvvv; \
+	else \
+		echo "Contract name and chain cannot be empty."; \
+	fi
