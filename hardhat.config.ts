@@ -5,7 +5,6 @@ import { config as dotenvConfig } from "dotenv";
 import "hardhat-contract-sizer";
 import "hardhat-deploy";
 import { removeConsoleLog } from "hardhat-preprocessor";
-import "hardhat-storage-layout";
 import "hardhat-test-suite-generator";
 import type { HardhatUserConfig } from "hardhat/config";
 import type { HttpNetworkAccountsUserConfig, NetworkUserConfig } from "hardhat/types";
@@ -138,12 +137,6 @@ const config: HardhatUserConfig = {
           optimizer: {
             enabled: true,
             runs: 200,
-          },
-          // https://docs.soliditylang.org/en/v0.8.14/internals/layout_in_storage.html
-          outputSelection: {
-            "*": {
-              "*": ["storageLayout"],
-            },
           },
           evmVersion: "paris",
         },

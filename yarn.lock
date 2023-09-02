@@ -55,7 +55,6 @@ __metadata:
     hardhat-deploy-ethers: ^0.4.1
     hardhat-gas-reporter: 1.0.9
     hardhat-preprocessor: ^0.1.5
-    hardhat-storage-layout: ^0.1.7
     hardhat-test-suite-generator: ^2.0.0
     lodash: ^4.17.21
     mocha: ^10.2.0
@@ -3065,15 +3064,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"console-table-printer@npm:^2.9.0":
-  version: 2.11.2
-  resolution: "console-table-printer@npm:2.11.2"
-  dependencies:
-    simple-wcswidth: ^1.0.1
-  checksum: 90bb40ef39f52356859067e39d0bf11e17f11ac920cd848ac373fa69dce9a2431505e61a174948eb8d6bbd820f19a013c8187034a15b6e744ddc79538de8bb4b
-  languageName: node
-  linkType: hard
-
 "cookie@npm:^0.4.1":
   version: 0.4.2
   resolution: "cookie@npm:0.4.2"
@@ -4811,17 +4801,6 @@ __metadata:
   peerDependencies:
     hardhat: ^2.0.5
   checksum: 7d543c2965828441741950b153d584ff096d7a006975f06af9870e05a928e56122b463c4a1b3b346f9a3baccaa6ee2dec1dfd026a434ac714ebf127bbe842fef
-  languageName: node
-  linkType: hard
-
-"hardhat-storage-layout@npm:^0.1.7":
-  version: 0.1.7
-  resolution: "hardhat-storage-layout@npm:0.1.7"
-  dependencies:
-    console-table-printer: ^2.9.0
-  peerDependencies:
-    hardhat: ^2.0.3
-  checksum: 8d27d6b16c1ebdffa032ba6b99c61996df4601dcbaf7d770c474806b492a56de9d21b4190086ab40f50a3a1f2e9851cc81034a9cfd2e21368941977324f96fd4
   languageName: node
   linkType: hard
 
@@ -7640,13 +7619,6 @@ __metadata:
   version: 4.0.2
   resolution: "signal-exit@npm:4.0.2"
   checksum: 41f5928431cc6e91087bf0343db786a6313dd7c6fd7e551dbc141c95bb5fb26663444fd9df8ea47c5d7fc202f60aa7468c3162a9365cbb0615fc5e1b1328fe31
-  languageName: node
-  linkType: hard
-
-"simple-wcswidth@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "simple-wcswidth@npm:1.0.1"
-  checksum: dc5bf4cb131d9c386825d1355add2b1ecc408b37dc2c2334edd7a1a4c9f527e6b594dedcdbf6d949bce2740c3a332e39af1183072a2d068e40d9e9146067a37f
   languageName: node
   linkType: hard
 
