@@ -342,10 +342,10 @@ Deploy the contracts to Hardhat Network:
 $ yarn deploy
 ```
 
-Deploy the contracts to a specific network, such as the Rinkeby testnet:
+Deploy the contracts to a specific network, such as the Goerli testnet:
 
 ```sh
-$ yarn deploy:network rinkeby
+$ yarn deploy:network goerli
 ```
 
 For more information on deploy check out repo
