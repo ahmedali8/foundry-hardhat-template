@@ -1,6 +1,6 @@
 {
   "[solidity]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
   },
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"
