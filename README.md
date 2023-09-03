@@ -1,4 +1,4 @@
-# Foundry + Hardhat Template [![Open in Gitpod][gitpod-badge]][gitpod] [![Github Actions][gha-badge]][gha] [![Hardhat][hardhat-badge]][hardhat] [![Foundry][foundry-badge]][foundry]
+# Foundry + Hardhat Template [![Open in Gitpod][gitpod-badge]][gitpod] [![Github Actions][gha-badge]][gha] [![Foundry][foundry-badge]][foundry] [![Hardhat][hardhat-badge]][hardhat]
 
 [gitpod]: https://gitpod.io/#https://github.com/ahmedali8/foundry-hardhat-template
 [gitpod-badge]: https://img.shields.io/badge/Gitpod-Open%20in%20Gitpod-FFB45B?logo=gitpod
@@ -28,6 +28,43 @@ A Foundry + Hardhat based template for developing Solidity smart contracts, with
 - [Prettier Plugin Solidity](https://github.com/prettier-solidity/prettier-plugin-solidity): code
   formatter
 
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Features](#features)
+  - [Sensible Defaults](#sensible-defaults)
+  - [GitHub Actions](#github-actions)
+- [Usage](#usage)
+  - [Pre Requisites](#pre-requisites)
+  - [Lint Solidity](#lint-solidity)
+  - [Foundry](#foundry)
+    - [Build or Compile](#build-or-compile)
+    - [Coverage](#coverage)
+    - [Clean](#clean)
+    - [Deploy](#deploy)
+    - [Gas Usage](#gas-usage)
+    - [Test](#test)
+    - [Notes](#notes)
+  - [Hardhat](#hardhat)
+    - [Run a Hardhat chain](#run-a-hardhat-chain)
+    - [Compile](#compile)
+    - [TypeChain](#typechain)
+    - [Test](#test-1)
+    - [Lint TypeScript](#lint-typescript)
+    - [Forking Mainnet](#forking-mainnet)
+    - [Coverage](#coverage-1)
+    - [Clean](#clean-1)
+    - [Deploy](#deploy-1)
+    - [Generate NATSPEC Doc](#generate-natspec-doc)
+    - [View Contracts Size](#view-contracts-size)
+    - [Verify Contract](#verify-contract)
+      - [Manual Verify](#manual-verify)
+      - [Verify Contract Programmatically](#verify-contract-programmatically)
+- [Syntax Highlighting](#syntax-highlighting)
+- [Using GitPod](#using-gitpod)
+- [Contributing](#contributing)
+- [Resources](#resources)
+
 ## Getting Started
 
 Click the [`Use this template`](https://github.com/ahmedali8/foundry-hardhat-template/generate)
@@ -36,9 +73,22 @@ button at the top of the page to create a new repository with this repo as the i
 Or, if you prefer to install the template manually:
 
 ```sh
-$ forge init my-project --template https://github.com/ahmedali8/foundry-hardhat-template
+$ mkdir my-project
 $ cd my-project
-$ make setup
+$ forge init --template ahmedali8/foundry-hardhat-template
+```
+
+Then, install dependencies
+
+```sh
+$ make setup # install Forge and Node.js deps
+```
+
+or
+
+```sh
+$ yarn install
+$ forge install
 ```
 
 If this is your first time with Foundry, check out the
@@ -89,6 +139,18 @@ You can edit the CI script in [.github/workflows/ci.yml](./.github/workflows/ci.
 
 # Usage
 
+### Pre Requisites
+
+You don't have to create a `.env` file, but filling in the environment variables may be useful when
+deploying to testnet or mainnet or debugging and testing against a mainnet fork.
+
+Follow the example in [`.env.example`](.env.example). You can choose to use either a mnemonic or
+individual private key by setting `MNEMONIC` or `PRIVATE_KEY` in your `.env` file.
+
+If you don't already have a mnemonic, use this [bip39](https://iancoleman.io/bip39/) to generate one
+Or if you don't already have a private key, use this [vanity-eth](https://vanity-eth.tk/) to
+generate one.
+
 ### Lint Solidity
 
 Lint the Solidity code:
@@ -97,29 +159,91 @@ Lint the Solidity code:
 $ yarn lint:sol
 ```
 
+## Foundry
+
+Here's a list of the most frequently needed commands.
+
+### Build or Compile
+
+Build the contracts:
+
+```sh
+$ forge build
+```
+
+### Coverage
+
+Get a test coverage report:
+
+```sh
+$ forge coverage
+```
+
+To get local HTMl reports:
+
+```
+$ make foundry-report
+```
+
+For this to work, you need to have [lcov](https://github.com/linux-test-project/lcov) installed.
+
+### Clean
+
+Delete the build artifacts and cache directories:
+
+```sh
+$ forge clean
+```
+
+### Deploy
+
+Deploy to Anvil:
+
+```sh
+# Spin up an anvil local node
+$ anvil
+
+# On another terminal
+$ forge script scripts/foundry/DeployLock.s.sol:DeployLock \
+  --fork-url localhost \
+  --broadcast \
+  -vvvv
+```
+
+For this script to work for testnet or mainnet, refer to [Pre Requisites](#pre-requisites).
+
+For instructions on how to deploy to a testnet or mainnet, check out the
+[Solidity Scripting tutorial](https://book.getfoundry.sh/tutorials/solidity-scripting.html).
+
+### Gas Usage
+
+Get a gas report:
+
+```sh
+$ forge test --gas-report
+```
+
+### Test
+
+Run the tests:
+
+```sh
+$ forge test
+```
+
+You can also use
+[console.log](https://book.getfoundry.sh/faq?highlight=console.log#how-do-i-use-consolelog), whose
+logs you can see in the terminal output by adding the `-vvvv` flag.
+
+## Notes
+
+1. Foundry piggybacks off [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to
+   manage dependencies. There's a [guide](https://book.getfoundry.sh/projects/dependencies.html)
+   about how to work with dependencies in the book.
+2. You don't have to create a `.env` file, but filling in the environment variables may be useful
+   when debugging and testing against a mainnet fork.
+
 ## Hardhat
-
-### Pre Requisites
-
-Before running any command, you need to create a `.env` file and set all necessary environment
-variables. Follow the example in `.env.example`. You can either use mnemonic or individual private
-keys by setting
-
-```sh
-$ ACCOUNT_TYPE="MNEMONIC" (Default)
-or
-$ ACCOUNT_TYPE="PRIVATE_KEYS"
-```
-
-If you don't already have a mnemonic, use this [mnemonic-website](https://iancoleman.io/bip39/) to
-generate one Or if you don't already have a private key, use this
-[privatekey-website](https://vanity-eth.tk/) to generate one.
-
-Then, proceed with installing dependencies:
-
-```sh
-$ yarn install
-```
 
 ### Run a Hardhat chain
 
@@ -275,83 +399,6 @@ insight.
 
 Example deploy script with `verifyContract` function is
 [00_deploy_lock_contract.ts](./deploy/00_deploy_lock_contract.ts)
-
-## Foundry
-
-Here's a list of the most frequently needed commands.
-
-### Build or Compile
-
-Build the contracts:
-
-```sh
-$ forge build
-```
-
-### Coverage
-
-Get a test coverage report:
-
-```sh
-$ forge coverage
-```
-
-### Clean
-
-Delete the build artifacts and cache directories:
-
-```sh
-$ forge clean
-```
-
-### Deploy
-
-Deploy to Anvil:
-
-```sh
-# Spin up an anvil local node
-$ anvil
-
-# On another terminal
-$ forge script scripts/foundry/DeployLock.s.sol:DeployLock \
-  --fork-url http://localhost:8545 \
-  --broadcast \
-  -vvvv
-```
-
-For this script to work, you need to have a `MNEMONIC` or `PRIVATE_KEY` environment variable set to
-a valid [BIP39 mnemonic](https://iancoleman.io/bip39/) or private key, respectively.
-
-For instructions on how to deploy to a testnet or mainnet, check out the
-[Solidity Scripting tutorial](https://book.getfoundry.sh/tutorials/solidity-scripting.html).
-
-### Gas Usage
-
-Get a gas report:
-
-```sh
-$ forge test --gas-report
-```
-
-### Test
-
-Run the tests:
-
-```sh
-$ forge test
-```
-
-You can also use
-[console.log](https://book.getfoundry.sh/faq?highlight=console.log#how-do-i-use-consolelog), whose
-logs you can see in the terminal output by adding the `-vvvv` flag.
-
-## Notes
-
-1. Foundry piggybacks off [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to
-   manage dependencies. There's a [guide](https://book.getfoundry.sh/projects/dependencies.html)
-   about how to work with dependencies in the book.
-2. You don't have to create a `.env` file, but filling in the environment variables may be useful
-   when debugging and testing against a mainnet fork.
 
 ## Syntax Highlighting
 
