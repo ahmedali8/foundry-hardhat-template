@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import { LockTest } from "../LockTest.t.sol";
+import { Errors } from "contracts/Lock.sol";
 
-contract Lock_Withdraw is LockTest {
+import { Lock_Test } from "../Lock.t.sol";
+
+contract Lock_Withdraw is Lock_Test {
     /// @dev it should revert.
     function test_RevertWhen_CalledTooSoon() external {
-        vm.expectRevert(LockError_YouCantWithdrawYet);
+        vm.expectRevert(Errors.Lock_CannotWithdrawYet.selector);
         lock.withdraw();
     }
 
@@ -24,7 +26,7 @@ contract Lock_Withdraw is LockTest {
         CalledOnTime
     {
         vm.assume(anotherAccount != address(0));
-        vm.assume(anotherAccount != deployer);
+        vm.assume(anotherAccount != users.deployer);
 
         // We can increase the time to unlockTime.
         increaseTimeToUnlockTime();
@@ -33,7 +35,7 @@ contract Lock_Withdraw is LockTest {
         changePrank(anotherAccount);
 
         // Run the test.
-        vm.expectRevert(LockError_YouArentTheOwner);
+        vm.expectRevert(Errors.Lock_CallerNotOwner.selector);
         lock.withdraw();
     }
 
@@ -62,7 +64,7 @@ contract Lock_Withdraw is LockTest {
         increaseTimeToUnlockTime();
 
         uint256 prevLockBalance = address(lock).balance;
-        uint256 prevOwnerBalance = deployer.balance;
+        uint256 prevOwnerBalance = users.deployer.balance;
 
         lock.withdraw();
 
@@ -70,7 +72,7 @@ contract Lock_Withdraw is LockTest {
         uint256 expectedLockBalance = 0;
         assertEq(actualLockBalance, expectedLockBalance);
 
-        uint256 actualDeployerBalance = deployer.balance;
+        uint256 actualDeployerBalance = users.deployer.balance;
         uint256 expectedDeployerBalance = prevLockBalance + prevOwnerBalance;
         assertEq(actualDeployerBalance, expectedDeployerBalance);
     }

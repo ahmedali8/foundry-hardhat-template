@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import { LockTest } from "../LockTest.t.sol";
+import { Lock_Test } from "../Lock.t.sol";
 
-contract Lock_UnlockTime is LockTest {
+contract Lock_UnlockTime is Lock_Test {
     /// @dev it should retrieve correct unlockTime
     function test_UnlockTime() external {
         uint256 actualUnlockTime = lock.unlockTime();

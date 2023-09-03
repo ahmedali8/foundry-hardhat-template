@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import { LockTest } from "../LockTest.t.sol";
-import { Lock } from "contracts/Lock.sol";
+import { Lock, Errors } from "contracts/Lock.sol";
 
-contract Lock_Constructor is LockTest {
+import { Lock_Test } from "../Lock.t.sol";
+
+contract Lock_Constructor is Lock_Test {
     /// @dev it should revert.
     function test_RevertWhen_UnlockTimeNotInFuture() external {
-        vm.expectRevert(LockError_UnlockTimeShouldBeInTheFuture);
+        vm.expectRevert(Errors.Lock_UnlockTimeShouldBeInTheFuture.selector);
         new Lock(block.timestamp);
     }
 
