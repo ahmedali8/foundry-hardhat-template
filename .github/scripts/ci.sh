@@ -39,3 +39,13 @@ sedi "/gha-badge/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;"
 
 # Rename instances of "ahmedali8/foundry-hardhat-template" to the new repo name in yarn.lock
 sedi "s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "yarn.lock"
+
+# Copy README.md to GUIDE.md
+cp README.md GUIDE.md
+
+# Update README.md
+# Define the line to add
+new_line="For usage checkout [GUIDE.md](./GUIDE.md)"
+
+# Use awk to retain lines 1 to 11 and add the new line
+awk 'NR<=11 {print} NR==11 {print "\n'"$new_line"'"}' README.md > temp.md && mv temp.md README.md

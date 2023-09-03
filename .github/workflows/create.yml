@@ -21,21 +21,21 @@ jobs:
       - name: "Check out the repo"
         uses: "actions/checkout@v3"
 
-      - name: "Update package.json"
+      - name: "Update repository metadata"
         env:
           GITHUB_REPOSITORY_DESCRIPTION: ${{ github.event.repository.description }}
         run:
-          ./.github/scripts/rename.sh "$GITHUB_REPOSITORY" "$GITHUB_REPOSITORY_OWNER"
+          ./.github/scripts/ci.sh "$GITHUB_REPOSITORY" "$GITHUB_REPOSITORY_OWNER"
           "$GITHUB_REPOSITORY_DESCRIPTION"
 
-      - name: "Add rename summary"
+      - name: "Add update summary"
         run: |
-          echo "## Commit results" >> $GITHUB_STEP_SUMMARY
+          echo "## Update Metadata results" >> $GITHUB_STEP_SUMMARY
           echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
 
-      - name: "Remove `rename.sh` and `create.yml`"
+      - name: "Remove `ci.sh` and `create.yml`"
         run: |
-          rm -f "./.github/scripts/rename.sh"
+          rm -f "./.github/scripts/ci.sh"
           rm -f "./.github/workflows/create.yml"
 
       - name: "Add remove summary"
