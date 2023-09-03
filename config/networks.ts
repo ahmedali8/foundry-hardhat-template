@@ -6,7 +6,7 @@ dotenvConfig({ path: resolve(process.cwd(), dotenvConfigPath) });
 
 const INFURA_KEY = process.env.INFURA_API_KEY;
 if (typeof INFURA_KEY === "undefined") {
-  throw new Error(`INFURA_API_KEY must be a defined environment variable`);
+  console.log(`INFURA_API_KEY must be a defined environment variable`);
 }
 
 const infuraUrl = (network: string): string => `https://${network}.infura.io/v3/${INFURA_KEY}`;

@@ -6,7 +6,6 @@
     "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
   "dotenv.enableAutocloaking": true,
-  "editor.rulers": [100],
   "editor.formatOnSave": true,
   "evenBetterToml.formatter.arrayAutoExpand": true,
   "evenBetterToml.formatter.indentEntries": true,

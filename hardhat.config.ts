@@ -17,26 +17,26 @@ import "./tasks";
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
 dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
 
-const ACCOUNT_TYPE: string = process.env.ACCOUNT_TYPE || "";
-const mnemonic: string = process.env.MNEMONIC || "";
-if (ACCOUNT_TYPE === "MNEMONIC" && !mnemonic) {
-  throw new Error("Please set your MNEMONIC in a .env file");
-}
-if (ACCOUNT_TYPE === "PRIVATE_KEYS" && typeof process.env.PRIVATE_KEY_1 === "undefined") {
-  throw new Error("Please set at least one PRIVATE_KEY_1 in a .env file");
-}
+const TEST_MNEMONIC: string = "test test test test test test test test test test test junk";
+const mnemonic: string = process.env.MNEMONIC || TEST_MNEMONIC;
+const privateKey: string = process.env.PRIVATE_KEY || "";
 
+/**
+ * - If $PRIVATE_KEY is defined, use it.
+ * - If $MNEMONIC is not defined, default to a test mnemonic.
+ */
 const getAccounts = (): HttpNetworkAccountsUserConfig => {
-  if (ACCOUNT_TYPE === "PRIVATE_KEYS") {
+  if (privateKey) {
     // can add as many private keys as you want
     return [
-      `0x${process.env.PRIVATE_KEY_1}`,
+      `0x${privateKey}`,
       // `0x${process.env.PRIVATE_KEY_2}`,
       // `0x${process.env.PRIVATE_KEY_3}`,
       // `0x${process.env.PRIVATE_KEY_4}`,
       // `0x${process.env.PRIVATE_KEY_5}`,
     ];
   } else {
+    // use mnemonic
     return {
       mnemonic,
       count: 10,
