@@ -1,5 +1,5 @@
-export enum Lock__Errors {
-  UnlockTimeShouldBeInTheFuture = "Unlock time should be in the future",
-  YouCantWithdrawYet = "You can't withdraw yet",
-  YouArentTheOwner = "You aren't the owner",
+export enum Errors {
+  Lock_CallerNotOwner = "Lock_CallerNotOwner",
+  Lock_CannotWithdrawYet = "Lock_CannotWithdrawYet",
+  Lock_UnlockTimeShouldBeInTheFuture = "Lock_UnlockTimeShouldBeInTheFuture",
 }

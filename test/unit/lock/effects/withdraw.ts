@@ -2,13 +2,14 @@ import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import { time } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 
-import { Lock__Errors } from "../../../shared/errors";
+import { Errors } from "../../../shared/errors";
 
 export default function shouldBehaveLikeWithdraw(): void {
   context("when called too soon", function () {
     it("reverts", async function () {
-      await expect(this.contracts.lock.withdraw()).to.be.revertedWith(
-        Lock__Errors.YouCantWithdrawYet
+      await expect(this.contracts.lock.withdraw()).to.be.revertedWithCustomError(
+        this.contracts.lock,
+        Errors.Lock_CannotWithdrawYet
       );
     });
   });
@@ -20,9 +21,9 @@ export default function shouldBehaveLikeWithdraw(): void {
       await time.increaseTo(this.unlockTime);
 
       // We use lock.connect() to send a transaction from another account
-      await expect(this.contracts.lock.connect(anotherAccount).withdraw()).to.be.revertedWith(
-        Lock__Errors.YouArentTheOwner
-      );
+      await expect(
+        this.contracts.lock.connect(anotherAccount).withdraw()
+      ).to.be.revertedWithCustomError(this.contracts.lock, Errors.Lock_CallerNotOwner);
     });
   });
 
