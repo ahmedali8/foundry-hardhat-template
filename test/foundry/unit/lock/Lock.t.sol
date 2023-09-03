@@ -15,7 +15,7 @@ abstract contract Lock_Test is Base_Test {
                                CONSTANTS
     //////////////////////////////////////////////////////////////*/
     uint256 internal constant ONE_YEAR = 365 days;
-    uint256 internal constant ONE_GWEI = 1;
+    uint256 internal constant ONE_WEI = 1;
 
     /*//////////////////////////////////////////////////////////////
                                VARIABLES
@@ -35,9 +35,9 @@ abstract contract Lock_Test is Base_Test {
     /// @dev Deploys {Lock} contract
     function deployLock() internal {
         unlockTime = block.timestamp + ONE_YEAR; // latestTimestamp + ONE_YEAR
-        lockedAmount = ONE_GWEI;
+        lockedAmount = ONE_WEI;
 
-        lock = new Lock{ value: ONE_GWEI }(unlockTime);
+        lock = new Lock{ value: ONE_WEI }(unlockTime);
         vm.label({ account: address(lock), newLabel: "Lock" });
     }
 }
