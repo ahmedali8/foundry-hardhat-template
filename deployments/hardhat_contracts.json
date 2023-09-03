@@ -19,6 +19,21 @@
               "type": "constructor"
             },
             {
+              "inputs": [],
+              "name": "Lock_CallerNotOwner",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "Lock_CannotWithdrawYet",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "Lock_UnlockTimeShouldBeInTheFuture",
+              "type": "error"
+            },
+            {
               "anonymous": false,
               "inputs": [
                 {
