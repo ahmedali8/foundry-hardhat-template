@@ -4,7 +4,7 @@
     "dotenv.dotenv-vscode",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
-    "juanblanco.solidity",
+    "NomicFoundation.hardhat-solidity",
     "tamasfe.even-better-toml"
   ]
 }

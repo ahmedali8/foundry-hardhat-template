@@ -6,5 +6,5 @@ tasks:
 vscode:
   extensions:
     - "esbenp.prettier-vscode"
-    - "juanblanco.solidity"
+    - "NomicFoundation.hardhat-solidity"
     - "ritwickdey.LiveServer"
