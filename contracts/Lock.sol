@@ -4,6 +4,12 @@ pragma solidity ^0.8.19;
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
+library Errors {
+    error Lock_CallerNotOwner();
+    error Lock_CannotWithdrawYet();
+    error Lock_UnlockTimeShouldBeInTheFuture();
+}
+
 contract Lock {
     uint256 public unlockTime;
     address payable public owner;
@@ -11,8 +17,7 @@ contract Lock {
     event Withdrawal(uint256 amount, uint256 when);
 
     constructor(uint256 _unlockTime) payable {
-        // solhint-disable-next-line reason-string
-        require(block.timestamp < _unlockTime, "Unlock time should be in the future");
+        if (block.timestamp >= _unlockTime) revert Errors.Lock_UnlockTimeShouldBeInTheFuture();
 
         unlockTime = _unlockTime;
         owner = payable(msg.sender);
@@ -23,8 +28,8 @@ contract Lock {
         // terminal
         // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
 
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
+        if (block.timestamp < unlockTime) revert Errors.Lock_CannotWithdrawYet();
+        if (msg.sender != owner) revert Errors.Lock_CallerNotOwner();
 
         emit Withdrawal(address(this).balance, block.timestamp);
 
