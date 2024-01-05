@@ -88,6 +88,5 @@
     "template"
   ],
   "license": "UNLICENSED",
-  "private": false,
   "packageManager": "yarn@4.0.2"
 }

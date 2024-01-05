@@ -4,14 +4,14 @@
   auto_detect_solc = false
   bytecode_hash = "none"
   cbor_metadata = false
-  evm_version = "paris"
+  evm_version = "paris"          # See https://www.evmdiff.com/features?name=PUSH0&kind=opcode
   gas_reports = ["*"]
   libs = ["node_modules", "lib"]
   optimizer = true
   optimizer_runs = 200
   out = "out"
   script = "scripts/foundry"
-  solc = "0.8.19"
+  solc = "0.8.23"
   src = "contracts"
   test = "test/foundry"
 
