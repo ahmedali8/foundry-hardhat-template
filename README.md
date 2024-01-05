@@ -78,6 +78,14 @@ $ cd my-project
 $ forge init --template ahmedali8/foundry-hardhat-template
 ```
 
+Recommended node version is v18.x
+
+If you have [nvm](https://github.com/nvm-sh/nvm) then run:
+
+```sh
+$ nvm use
+```
+
 Then, install dependencies
 
 ```sh
