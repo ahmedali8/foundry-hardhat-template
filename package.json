@@ -88,6 +88,6 @@
     "template"
   ],
   "license": "UNLICENSED",
-  "private": true,
-  "packageManager": "yarn@3.6.3"
+  "private": false,
+  "packageManager": "yarn@4.0.2"
 }
