@@ -1,0 +1,34 @@
+name: "Multibuild"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 0" # at 3:00am UTC every Sunday
+
+jobs:
+  multibuild:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v3"
+        with:
+          submodules: "recursive"
+
+      - name: "Install Foundry"
+        uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: "Install Node.js"
+        uses: "actions/setup-node@v3"
+        with:
+          cache: "yarn"
+          node-version: "lts/*"
+
+      - name: "Install the Node.js dependencies"
+        run: "yarn install --immutable --inline-builds"
+
+      - name: "Check that system can be built with multiple Solidity versions"
+        uses: "PaulRBerg/foundry-multibuild@v1"
+        with:
+          min: "0.8.19"
+          max: "0.8.23"
+          skip-test: "true"
