@@ -25,7 +25,7 @@ jobs:
         id: "slither" # Required to reference this step in the next step.
         with:
           fail-on: "none" # Required to avoid failing the CI run regardless of findings.
-          node-version: 16
+          node-version: 18
           sarif: "results.sarif"
           solc-version: "0.8.23"
 

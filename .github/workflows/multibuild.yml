@@ -21,7 +21,7 @@ jobs:
         uses: "actions/setup-node@v3"
         with:
           cache: "yarn"
-          node-version: "lts/*"
+          node-version: 18
 
       - name: "Install the Node.js dependencies"
         run: "yarn install --immutable --inline-builds"
