@@ -82,30 +82,30 @@
   localhost = "http://localhost:8545"
 
   # ETHEREUM
-  goerli = "https://goerli.infura.io/v3/${API_KEY_INFURA}"
-  mainnet = "https://eth-mainnet.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
-  sepolia = "https://sepolia.infura.io/v3/${API_KEY_INFURA}"
+  goerli = "https://goerli.infura.io/v3/${INFURA_API_KEY}"
+  mainnet = "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+  sepolia = "https://sepolia.infura.io/v3/${INFURA_API_KEY}"
 
   # BINANCE SMART CHAIN
   bnb_smart_chain = "https://bsc-dataseed.binance.org"
   bnb_smart_chain_testnet = "https://rpc.ankr.com/bsc_testnet_chapel"
 
   # MATIC/POLYGON
-  polygon = "https://polygon-mainnet.infura.io/v3/${API_KEY_INFURA}"
+  polygon = "https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}"
   polygon_mumbai = "https://polygon-mumbai.infura.io/v3/${INFURA_API_KEY}"
 
   # OPTIMISM
-  optimism = "https://optimism-mainnet.infura.io/v3/${API_KEY_INFURA}"
+  optimism = "https://optimism-mainnet.infura.io/v3/${INFURA_API_KEY}"
   optimism_goerli = "https://optimism-goerli.infura.io/v3/${INFURA_API_KEY}"
 
   # ARBITRUM
   arbitrum_nova = ""
-  arbitrum_one = "https://arbitrum-mainnet.infura.io/v3/${API_KEY_INFURA}"
+  arbitrum_one = "https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}"
   arbitrum_one_goerli = "https://arbitrum-goerli.infura.io/v3/${INFURA_API_KEY}"
 
   # AVALANCHE
-  avalanche = "https://avalanche-mainnet.infura.io/v3/${API_KEY_INFURA}"
-  avalanche_fuji = "https://avalanche-fuji.infura.io/v3/${API_KEY_INFURA}"
+  avalanche = "https://avalanche-mainnet.infura.io/v3/${INFURA_API_KEY}"
+  avalanche_fuji = "https://avalanche-fuji.infura.io/v3/${INFURA_API_KEY}"
 
   # GNOSIS CHAIN
   gnosis_chain = "https://rpc.gnosischain.com"
