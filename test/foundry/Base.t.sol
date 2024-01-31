@@ -1,16 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.23 <0.9.0;
 
-import { PRBTest } from "@prb/test/PRBTest.sol";
-import { StdCheats } from "forge-std/StdCheats.sol";
-import { StdUtils } from "forge-std/StdUtils.sol";
+import { Test } from "forge-std/Test.sol";
 
 import { Lock } from "contracts/Lock.sol";
 
 import { Users } from "./utils/Types.sol";
 
 /// @notice Common contract members needed across test contracts.
-abstract contract Base_Test is PRBTest, StdCheats, StdUtils {
+abstract contract Base_Test is Test {
     /*//////////////////////////////////////////////////////////////
                                VARIABLES
     //////////////////////////////////////////////////////////////*/
