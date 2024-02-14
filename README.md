@@ -24,9 +24,7 @@ A Foundry + Hardhat based template for developing Solidity smart contracts, with
   deploy smart contracts
 - [Forge Std](https://github.com/foundry-rs/forge-std): collection of helpful contracts and
   cheatcodes for testing
-- [Solhint Community](https://github.com/solhint-community/solhint-community): code linter
-- [Prettier Plugin Solidity](https://github.com/prettier-solidity/prettier-plugin-solidity): code
-  formatter
+- [Solhint](https://github.com/protofire/solhint): linter for Solidity code
 
 ## Table of Contents
 
@@ -78,7 +76,7 @@ $ cd my-project
 $ forge init --template ahmedali8/foundry-hardhat-template
 ```
 
-Recommended node version is v18.x
+Recommended node version is v20.x
 
 If you have [nvm](https://github.com/nvm-sh/nvm) then run:
 
@@ -144,6 +142,21 @@ Note though that by default it injects `.env.example` env variables into github 
 `$GITHUB_ENV`.
 
 You can edit the CI script in [.github/workflows/ci.yml](./.github/workflows/ci.yml).
+
+## Installing Dependencies
+
+Foundry typically uses git submodules to manage dependencies, but this template uses Node.js
+packages because [submodules don't scale](https://twitter.com/PaulRBerg/status/1736695487057531328).
+
+This is how to install dependencies:
+
+1. Install the dependency using your preferred package manager, e.g.
+   `yarn add dependency-name:dependency-url`
+   - Use this syntax to install from GitHub: `yarn add repo-name@github:username/repo-name#tag-name`
+2. Add a remapping for the dependency in [remappings.txt](./remappings.txt), e.g.
+   `dependency-name=node_modules/dependency-name`
+
+Note that OpenZeppelin Contracts is pre-installed, so you can follow that as an example.
 
 # Usage
 
