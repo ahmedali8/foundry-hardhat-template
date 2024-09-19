@@ -3,9 +3,9 @@ name: "Create"
 env:
   DOTENV_CONFIG_PATH: "./.env.example"
 
-# The workflow will run only when `use this template` is used
+# The workflow will run when `use this template` is used
 on:
-  create:
+  push:
 
 jobs:
   create:
