@@ -64,8 +64,6 @@
     "fs-extra": "^11.2.0",
     "hardhat": "2.22.10",
     "hardhat-contract-sizer": "2.10.0",
-    "hardhat-deploy": "^0.12.4",
-    "hardhat-deploy-ethers": "^0.4.2",
     "hardhat-gas-reporter": "2.2.1",
     "hardhat-preprocessor": "^0.1.5",
     "hardhat-test-suite-generator": "^2.0.0",
