@@ -9,6 +9,9 @@ declare module "mocha" {
     contracts: Contracts;
     loadFixture: <T>(fixture: Fixture<T>) => Promise<T>;
     signers: Signers;
+
+    unlockTime: number;
+    lockedAmount: bigint;
   }
 }
 
