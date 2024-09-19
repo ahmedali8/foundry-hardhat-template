@@ -19,7 +19,7 @@
   "exclude": ["node_modules"],
   "files": ["./hardhat.config.ts"],
   "include": [
-    "deploy/**/*",
+    "ignition/**/*",
     "scripts/**/*",
     "tasks/**/*",
     "test/**/*",
