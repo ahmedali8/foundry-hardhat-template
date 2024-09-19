@@ -60,7 +60,7 @@
     "eslint-config-prettier": "^9.1.0",
     "ethers": "6.13.2",
     "evm-bn": "^1.1.2",
-    "forge-std": "github:foundry-rs/forge-std#v1.7.6",
+    "forge-std": "github:foundry-rs/forge-std#v1.9.2",
     "fs-extra": "^11.2.0",
     "hardhat": "2.22.10",
     "hardhat-contract-sizer": "2.10.0",
