@@ -7,13 +7,13 @@
     "url": "https://github.com/ahmedali8"
   },
   "scripts": {
-    "chain": "hardhat node --no-deploy --export-all ./generated/chain.json --network hardhat",
+    "chain": "hardhat node --network hardhat",
     "clean": "shx rm -rf ./artifacts ./cache ./cache_hardhat ./coverage ./coverage.json ./types && yarn typechain",
     "compile": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat compile",
     "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"test/**/*.ts\" && yarn typechain",
-    "deploy:hardhat-deploy": "hardhat deploy --export-all ./deployments/hardhat_contracts.json",
-    "deploy": "yarn deploy:hardhat-deploy --network hardhat",
-    "deploy:network": "yarn deploy:hardhat-deploy --network",
+    "deploy:ignition": "hardhat ignition deploy ./ignition/modules/*.ts",
+    "deploy": "yarn deploy:ignition --network hardhat",
+    "deploy:network": "yarn deploy:ignition --network --verify",
     "fork": "hardhat node --network hardhat --fork https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
     "lint": "yarn lint:sol && yarn lint:ts && yarn prettier:check",
     "lint:sol": "forge fmt --check && yarn solhint \"{script,contracts,test}/**/*.sol\"",
