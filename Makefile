@@ -25,7 +25,6 @@ PROJECT_NAME := foundry-hardhat-template
 YARN := yarn
 FORGE := forge
 NVM := nvm
-NODE := node
 
 # Directories
 SCRIPTS_DIR := scripts/foundry
@@ -54,7 +53,7 @@ help:
 	@echo "  help              - Show this help message"
 
 # Complete project setup
-setup: check-node-version update-libs create-env install-deps
+setup: update-libs create-env install-deps
 	@echo "✅ Setup complete!"
 
 # Run all tests
@@ -102,16 +101,7 @@ deploy-contract:
 # NODE.JS VERSION MANAGEMENT
 # =============================================================================
 
-.PHONY: check-node-version setup-with-nvm check-node-version-direct
-
-# Check and ensure correct Node.js version
-check-node-version:
-	@echo "🔍 Checking Node.js version..."
-	@if command -v $(NVM) >/dev/null 2>&1; then \
-		$(MAKE) setup-with-nvm; \
-	else \
-		$(MAKE) check-node-version-direct; \
-	fi
+.PHONY: setup-with-nvm
 
 # Setup Node.js version using nvm
 setup-with-nvm:
@@ -124,20 +114,6 @@ setup-with-nvm:
 		$(NVM) install $(NODE_VERSION); \
 		$(NVM) use $(NODE_VERSION); \
 	fi
-
-# Check Node.js version when nvm is not available
-check-node-version-direct:
-	@if ! command -v $(NODE) >/dev/null 2>&1; then \
-		echo "❌ Node.js not found. Please install nvm: https://github.com/nvm-sh/nvm#installing-and-updating"; \
-		exit 1; \
-	fi
-	@CURRENT_VERSION=$$($(NODE) --version | cut -d. -f1); \
-	if [ "$$CURRENT_VERSION" != "$(NODE_VERSION)" ]; then \
-		echo "❌ Error: Node.js $$($(NODE) --version) is installed but .nvmrc requires $(NODE_VERSION)"; \
-		echo "💡 Please install nvm and run 'nvm install $(NODE_VERSION)' or switch to Node.js $(NODE_VERSION)"; \
-		exit 1; \
-	fi
-	@echo "✅ Node.js $$($(NODE) --version) is compatible, proceeding..."
 
 # =============================================================================
 # DEPENDENCY MANAGEMENT

@@ -13,7 +13,7 @@
   script = "scripts/foundry"
   solc = "0.8.26"
   src = "contracts"
-  test = "test/foundry"
+  test = "tests/foundry"
 
   [profile.default.fuzz]
     max_test_rejects = 1_000_000 # Number of times `vm.assume` can fail

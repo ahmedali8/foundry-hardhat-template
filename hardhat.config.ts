@@ -111,7 +111,7 @@ const config: HardhatUserConfig = {
     deploy: "./deploy",
     deployments: "./deployments",
     sources: "./contracts",
-    tests: "./test",
+    tests: "./tests",
   },
   preprocess: {
     eachLine: removeConsoleLog(

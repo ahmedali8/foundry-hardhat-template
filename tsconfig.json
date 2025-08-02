@@ -22,7 +22,7 @@
     "deploy/**/*",
     "scripts/**/*",
     "tasks/**/*",
-    "test/**/*",
+    "tests/**/*",
     "types/**/*",
     "utils/**/*",
     "config/**/*"
