@@ -11,7 +11,7 @@
   optimizer_runs = 200
   out = "out"
   script = "scripts/foundry"
-  solc = "0.8.23"
+  solc = "0.8.26"
   src = "contracts"
   test = "test/foundry"
 

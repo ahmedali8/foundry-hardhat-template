@@ -27,7 +27,7 @@ jobs:
           fail-on: "none" # Required to avoid failing the CI run regardless of findings.
           node-version: 20
           sarif: "results.sarif"
-          solc-version: "0.8.23"
+          solc-version: "0.8.26"
 
       - name: "Upload SARIF file to GitHub code scanning"
         uses: "github/codeql-action/upload-sarif@v2"
