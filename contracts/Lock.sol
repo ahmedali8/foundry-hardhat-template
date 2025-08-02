@@ -24,7 +24,8 @@ contract Lock {
     /// @notice Constructor that sets the unlock time and owner
     /// @param _unlockTime The timestamp when funds can be withdrawn (must be in the future)
     constructor(uint256 _unlockTime) payable {
-        if (block.timestamp > _unlockTime) revert Errors.Lock_UnlockTimeShouldBeInTheFuture();
+        // solhint-disable-next-line
+        if (block.timestamp >= _unlockTime) revert Errors.Lock_UnlockTimeShouldBeInTheFuture();
 
         unlockTime = _unlockTime;
         owner = payable(msg.sender);
