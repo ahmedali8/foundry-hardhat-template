@@ -60,7 +60,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.2"
     ethers: "npm:6.15.0"
     evm-bn: "npm:^1.1.2"
-    forge-std: "github:foundry-rs/forge-std#v1.9.2"
+    forge-std: "github:foundry-rs/forge-std#v1.10.0"
     fs-extra: "npm:^11.3.0"
     hardhat: "npm:2.26.1"
     hardhat-contract-sizer: "npm:2.10.0"
@@ -4276,10 +4276,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"forge-std@github:foundry-rs/forge-std#v1.9.2":
-  version: 1.9.2
-  resolution: "forge-std@https://github.com/foundry-rs/forge-std.git#commit=1714bee72e286e73f76e320d110e0eaf5c4e649d"
-  checksum: 10/e80f468eadf2a0801f33bbe64d5d3395d7b0d46325de0823a22ad8947493ee50de50cef9b141a354b0ba645f7c58086deb110b7260a9b6087d34a2a32ac1e932
+"forge-std@github:foundry-rs/forge-std#v1.10.0":
+  version: 1.10.0
+  resolution: "forge-std@https://github.com/foundry-rs/forge-std.git#commit=8bbcf6e3f8f62f419e5429a0bd89331c85c37824"
+  checksum: 10/be31dd37fe623a763c670ed350c0049af679ad5ea68acbe629b71e690cd9b72957f4a31bc26de4532feaaf7b39b5e9585c955137b2fb447c00f5babbfe8a8e4e
   languageName: node
   linkType: hard
 
@@ -7962,11 +7962,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A^5.9.2#optional!builtin<compat/typescript>":
   version: 5.9.2
-  resolution: "typescript@patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=8c6c40"
+  resolution: "typescript@patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/a8606016982f2f46ed085e9b4b84d8a5251b42ff0560c995c20f3c3ab9543e37c1015d92ab2f1cc7b2af2b499d12bac57e11789da271fb3225af8ec0b24e5b64
+  checksum: 10/bd810ab13e8e557225a8b5122370385440b933e4e077d5c7641a8afd207fdc8be9c346e3c678adba934b64e0e70b0acf5eef9493ea05170a48ce22bef845fdc7
   languageName: node
   linkType: hard
 
