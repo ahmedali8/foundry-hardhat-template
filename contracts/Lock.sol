@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.26;
 
+import { Errors } from "./Errors.sol";
+
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
-
-library Errors {
-    error Lock_CallerNotOwner();
-    error Lock_CannotWithdrawYet();
-    error Lock_UnlockTimeShouldBeInTheFuture();
-}
 
 contract Lock {
     uint256 public unlockTime;

@@ -24,8 +24,7 @@ jobs:
       - name: "Update repository metadata"
         env:
           GITHUB_REPOSITORY_DESCRIPTION: ${{ github.event.repository.description }}
-        run:
-          ./.github/scripts/ci.sh "$GITHUB_REPOSITORY" "$GITHUB_REPOSITORY_OWNER"
+        run: ./.github/scripts/ci.sh "$GITHUB_REPOSITORY" "$GITHUB_REPOSITORY_OWNER"
           "$GITHUB_REPOSITORY_DESCRIPTION"
 
       - name: "Add update summary"
