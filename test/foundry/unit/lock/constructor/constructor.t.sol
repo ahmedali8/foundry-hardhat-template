@@ -5,8 +5,11 @@ import { Lock, Errors } from "contracts/Lock.sol";
 
 import { Lock_Test } from "../Lock.t.sol";
 
+/// @title Lock Constructor Tests
+/// @author @0xdev8
+/// @notice Tests for the Lock contract constructor functionality
 contract Lock_Constructor is Lock_Test {
-    /// @dev it should revert.
+    /// @notice Test that constructor reverts when unlock time is not in the future
     function test_RevertWhen_UnlockTimeNotInFuture() external {
         vm.expectRevert(Errors.Lock_UnlockTimeShouldBeInTheFuture.selector);
         new Lock(block.timestamp);
@@ -16,7 +19,8 @@ contract Lock_Constructor is Lock_Test {
         _;
     }
 
-    function test_RetrieveCorrectLockedAmount() external UnlockTimeInFuture {
+    /// @notice Test that the correct amount is locked in the contract
+    function test_RetrieveCorrectLockedAmount() external view UnlockTimeInFuture {
         uint256 actualBalance = address(lock).balance;
         uint256 expectedBalance = lockedAmount;
 

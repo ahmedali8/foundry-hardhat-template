@@ -5,8 +5,11 @@ import { Errors } from "contracts/Lock.sol";
 
 import { Lock_Test } from "../Lock.t.sol";
 
+/// @title Lock Withdraw Tests
+/// @author @0xdev8
+/// @notice Tests for the Lock contract withdraw functionality
 contract Lock_Withdraw is Lock_Test {
-    /// @dev it should revert.
+    /// @notice Test that withdraw reverts when called before unlock time
     function test_RevertWhen_CalledTooSoon() external {
         vm.expectRevert(Errors.Lock_CannotWithdrawYet.selector);
         lock.withdraw();
@@ -16,11 +19,13 @@ contract Lock_Withdraw is Lock_Test {
         _;
     }
 
+    /// @notice Helper function to increase time to unlock time
     function increaseTimeToUnlockTime() internal {
         vm.warp(unlockTime);
     }
 
-    /// @dev it should revert.
+    /// @notice Test that withdraw reverts when called from another account
+    /// @param anotherAccount The address of the non-owner account trying to withdraw
     function testFuzz_RevertWhen_CalledFromAnotherAccount(address anotherAccount)
         external
         CalledOnTime
@@ -43,7 +48,7 @@ contract Lock_Withdraw is Lock_Test {
         _;
     }
 
-    /// @dev it should emit Withdrawal event.
+    /// @notice Test that withdraw emits the Withdrawal event when called by owner on time
     function test_CalledFromOwnerOnTime_Event() external CalledOnTime CalledFromOwner {
         // We can increase the time to unlockTime.
         increaseTimeToUnlockTime();
@@ -54,7 +59,7 @@ contract Lock_Withdraw is Lock_Test {
         lock.withdraw();
     }
 
-    /// @dev it should transfer the funds to the owner.
+    /// @notice Test that withdraw transfers funds to the owner when called on time
     function test_CalledFromOwnerOnTime_TransferFundsToOwner()
         external
         CalledOnTime

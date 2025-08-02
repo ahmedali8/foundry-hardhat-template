@@ -3,16 +3,25 @@ pragma solidity >=0.8.26 <0.9.0;
 
 import { Base_Test } from "../Base.t.sol";
 
+/// @title IERC20 Interface
+/// @author @0xdev8
+/// @notice Minimal ERC20 interface for testing purposes
 interface IERC20 {
+    /// @notice Returns the balance of tokens for a given account
+    /// @param account The address to query the balance for
+    /// @return The balance of tokens for the account
     function balanceOf(address account) external view returns (uint256);
 }
 
+/// @title Fork Test Contract
+/// @author @0xdev8
+/// @notice Test contract for running tests against forked Ethereum mainnet
 /// @dev See the "Writing Tests" section in the Foundry Book if this is your first time with Forge.
 /// https://book.getfoundry.sh/forge/writing-tests
 contract ForkTest is Base_Test {
-    /// @dev Test that runs against a fork of Ethereum Mainnet. You need to set `ALCHEMY_API_KEY` in
-    /// your environment
-    /// for this test to run - you can get an API key for free at https://alchemy.com.
+    /// @notice Test that runs against a fork of Ethereum Mainnet
+    /// @dev You need to set `ALCHEMY_API_KEY` in your environment for this test to run - you can
+    /// get an API key for free at https://alchemy.com
     function testFork_Example() external {
         string memory alchemyApiKey = vm.envOr("ALCHEMY_API_KEY", string(""));
         // Silently pass this test if the user didn't define the API key.
