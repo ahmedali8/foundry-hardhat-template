@@ -87,9 +87,6 @@ const config: HardhatUserConfig = {
     // gasPrice: process.env.GAS_PRICE, // if commented out then it fetches from ethGasStationAPI
     coinmarketcap: process.env.COIN_MARKET_CAP_API_KEY || undefined,
     excludeContracts: [],
-    src: "./contracts",
-    maxMethodDiff: 10,
-    maxDeploymentDiff: 10,
   },
   namedAccounts: {
     deployer: {
