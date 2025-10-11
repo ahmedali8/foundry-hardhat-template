@@ -111,7 +111,7 @@ jobs:
             out
 
       - name: "Run Hardhat tests"
-        run: "bun test"
+        run: "bun hardhat test"
 
       - name: "Add Hardhat test summary"
         run: |
