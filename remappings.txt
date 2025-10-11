@@ -1,4 +1,4 @@
 ds-test/=node_modules/ds-test/src/
-forge-std/=node_modules/forge-std/
+forge-std/=node_modules/forge-std/src/
 hardhat/=node_modules/hardhat/
 @openzeppelin/=node_modules/@openzeppelin/

@@ -59,7 +59,7 @@
     "ds-test": "github:dapphub/ds-test#e282159d5170298eb2455a6c05280ab5a73a4ef0",
     "ethers": "6.15.0",
     "evm-bn": "^1.1.2",
-    "forge-std": "github:foundry-rs/forge-std#v1.10.0",
+    "forge-std": "github:foundry-rs/forge-std#v1.11.0",
     "fs-extra": "^11.3.0",
     "hardhat": "2.26.1",
     "hardhat-contract-sizer": "2.10.0",
