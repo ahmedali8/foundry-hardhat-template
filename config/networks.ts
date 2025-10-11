@@ -4,12 +4,12 @@ import { config as dotenvConfig } from "dotenv";
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
 dotenvConfig({ path: resolve(process.cwd(), dotenvConfigPath) });
 
-const INFURA_KEY = process.env.INFURA_API_KEY;
-if (typeof INFURA_KEY === "undefined") {
-  console.log(`INFURA_API_KEY must be a defined environment variable`);
+const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
+if (typeof ALCHEMY_API_KEY === "undefined") {
+  console.log(`ALCHEMY_API_KEY must be a defined environment variable`);
 }
 
-const infuraUrl = (network: string): string => `https://${network}.infura.io/v3/${INFURA_KEY}`;
+const alchemyUrl = (network: string): string => `https://${network}.g.alchemy.com/v2/${ALCHEMY_API_KEY}`;
 
 /**
  * All supported network names
@@ -19,37 +19,24 @@ const infuraUrl = (network: string): string => `https://${network}.infura.io/v3/
  *
  * $ bun deploy:network mainnet
  *
- * $ npx hardhat run scripts/deploy.ts --network polygon-mainnet
+ * $ npx hardhat run scripts/deploy.ts --network polygon_mainnet
  */
 export enum NetworkName {
-  // ETHEREUM
-  MAINNET = "mainnet",
-  GOERLI = "goerli",
-  SEPOLIA = "sepolia",
+  // BASE
+  BASE = "base",
+  BASE_SEPOLIA = "base_sepolia",
 
   // BINANCE SMART CHAIN
-  BSC = "bsc",
-  BSC_TESTNET = "bsc-testnet",
+  BNB_SMART_CHAIN = "bnb_smart_chain",
+  BNB_SMART_CHAIN_TESTNET = "bnb_smart_chain_testnet",
+
+  // ETHEREUM
+  MAINNET = "mainnet",
+  SEPOLIA = "sepolia",
 
   // POLYGON
-  POLYGON_MAINNET = "polygon-mainnet",
-  POLYGON_MUMBAI = "polygon-mumbai",
-
-  // OPTIMISM
-  OPTIMISM_MAINNET = "optimism-mainnet",
-  OPTIMISM_GOERLI = "optimism-goerli",
-
-  // ARBITRUM
-  ARBITRUM_MAINNET = "arbitrum-mainnet",
-  ARBITRUM_GOERLI = "arbitrum-goerli",
-
-  // AVALANCHE
-  AVALANCHE_MAINNET = "avalanche-mainnet",
-  FUJI_AVALANCHE = "fuji-avalance",
-
-  // FANTOM
-  FANTOM_MAINNET = "fantom-mainnet",
-  FANTOM_TESTNET = "fantom-testnet",
+  POLYGON_MAINNET = "polygon_mainnet",
+  POLYGON_AMOY = "polygon_amoy",
 }
 
 export interface Network {
@@ -58,79 +45,45 @@ export interface Network {
 }
 
 export const NETWORKS: { readonly [key in NetworkName]: Network } = {
-  // ETHEREUM
-  [NetworkName.MAINNET]: {
-    chainId: 1,
-    url: infuraUrl("mainnet"),
+  // BASE
+  [NetworkName.BASE]: {
+    chainId: 8453,
+    url: alchemyUrl("base"),
   },
-  [NetworkName.GOERLI]: {
-    chainId: 5,
-    url: infuraUrl("goerli"),
-  },
-  [NetworkName.SEPOLIA]: {
-    chainId: 11_155_111,
-    url: infuraUrl("sepolia"),
+  [NetworkName.BASE_SEPOLIA]: {
+    chainId: 84531,
+    url: alchemyUrl("base_sepolia"),
   },
 
   // BINANCE SMART CHAIN
-  [NetworkName.BSC]: {
+  [NetworkName.BNB_SMART_CHAIN]: {
     chainId: 56,
     url: "https://bsc-dataseed1.defibit.io/",
   },
-  [NetworkName.BSC_TESTNET]: {
+  [NetworkName.BNB_SMART_CHAIN_TESTNET]: {
     chainId: 97,
     url: "https://data-seed-prebsc-2-s1.binance.org:8545/",
+  },
+
+  // ETHEREUM
+  [NetworkName.MAINNET]: {
+    chainId: 1,
+    url: alchemyUrl("mainnet"),
+  },
+  [NetworkName.SEPOLIA]: {
+    chainId: 11_155_111,
+    url: alchemyUrl("sepolia"),
   },
 
   // MATIC/POLYGON
   [NetworkName.POLYGON_MAINNET]: {
     chainId: 137,
-    url: infuraUrl("polygon-mainnet"),
+    url: alchemyUrl("polygon_mainnet"),
   },
-  [NetworkName.POLYGON_MUMBAI]: {
+  [NetworkName.POLYGON_AMOY]: {
     chainId: 80_001,
-    url: infuraUrl("polygon-mumbai"),
-  },
-
-  // OPTIMISM
-  [NetworkName.OPTIMISM_MAINNET]: {
-    chainId: 10,
-    url: infuraUrl("optimism-mainnet"),
-  },
-  [NetworkName.OPTIMISM_GOERLI]: {
-    chainId: 420,
-    url: infuraUrl("optimism-goerli"),
-  },
-
-  // ARBITRUM
-  [NetworkName.ARBITRUM_MAINNET]: {
-    chainId: 42_161,
-    url: infuraUrl("arbitrum-mainnet"),
-  },
-  [NetworkName.ARBITRUM_GOERLI]: {
-    chainId: 421_611,
-    url: infuraUrl("arbitrum-goerli"),
-  },
-
-  // AVALANCHE
-  [NetworkName.AVALANCHE_MAINNET]: {
-    chainId: 43_114,
-    url: `https://api.avax.network/ext/bc/C/rpc`,
-  },
-  [NetworkName.FUJI_AVALANCHE]: {
-    chainId: 43_113,
-    url: `https://api.avax-test.network/ext/bc/C/rpc`,
-  },
-
-  // FANTOM
-  [NetworkName.FANTOM_MAINNET]: {
-    chainId: 250,
-    url: `https://rpcapi.fantom.network`,
-  },
-  [NetworkName.FANTOM_TESTNET]: {
-    chainId: 4_002,
-    url: `https://rpc.testnet.fantom.network`,
+    url: alchemyUrl("polygon-amoy"),
   },
 } as const;
 
-export const DEVELOPMENT_CHAINS: string[] = ["hardhat", "localhost", "ganache"];
+export const DEVELOPMENT_CHAINS: string[] = ["hardhat", "localhost", "anvil"];

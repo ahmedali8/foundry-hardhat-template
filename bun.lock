@@ -37,7 +37,6 @@
         "hardhat-deploy": "^1.0.4",
         "hardhat-deploy-ethers": "^0.4.2",
         "hardhat-gas-reporter": "2.3.0",
-        "hardhat-preprocessor": "^0.1.5",
         "lodash": "^4.17.21",
         "mocha": "^11.7.1",
         "prettier": "^3.6.2",
@@ -657,8 +656,6 @@
     "hardhat-deploy-ethers": ["hardhat-deploy-ethers@0.4.2", "", { "peerDependencies": { "@nomicfoundation/hardhat-ethers": "^3.0.2", "hardhat": "^2.16.0", "hardhat-deploy": "^0.12.0" } }, "sha512-AskNH/XRYYYqPT94MvO5s1yMi+/QvoNjS4oU5VcVqfDU99kgpGETl+uIYHIrSXtH5sy7J6gyVjpRMf4x0tjLSQ=="],
 
     "hardhat-gas-reporter": ["hardhat-gas-reporter@2.3.0", "", { "dependencies": { "@ethersproject/abi": "^5.7.0", "@ethersproject/bytes": "^5.7.0", "@ethersproject/units": "^5.7.0", "@solidity-parser/parser": "^0.20.1", "axios": "^1.6.7", "brotli-wasm": "^2.0.1", "chalk": "4.1.2", "cli-table3": "^0.6.3", "ethereum-cryptography": "^2.1.3", "glob": "^10.3.10", "jsonschema": "^1.4.1", "lodash": "^4.17.21", "markdown-table": "2.0.0", "sha1": "^1.1.1", "viem": "^2.27.0" }, "peerDependencies": { "hardhat": "^2.16.0" } }, "sha512-ySdA+044xMQv1BlJu5CYXToHzMexKFfIWxlQTBNNoerx1x96+d15IMdN01iQZ/TJ7NH2V5sU73bz77LoS/PEVw=="],
-
-    "hardhat-preprocessor": ["hardhat-preprocessor@0.1.5", "", { "dependencies": { "murmur-128": "^0.2.1" }, "peerDependencies": { "hardhat": "^2.0.5" } }, "sha512-j8m44mmPxpxAAd0G8fPHRHOas/INZdzptSur0TNJvMEGcFdLDhbHHxBcqZVQ/bmiW42q4gC60AP4CXn9EF018g=="],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 

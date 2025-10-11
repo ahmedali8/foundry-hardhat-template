@@ -7,7 +7,6 @@ import "hardhat-deploy";
 import { resolve } from "node:path";
 import { type HardhatUserConfig } from "hardhat/config";
 import { type HttpNetworkAccountsUserConfig, type NetworkUserConfig } from "hardhat/types";
-import { removeConsoleLog } from "hardhat-preprocessor";
 
 import { NETWORKS, type Network, type NetworkName } from "./config/networks";
 import "./tasks";
@@ -27,11 +26,11 @@ const getAccounts = (): HttpNetworkAccountsUserConfig => {
   if (privateKey) {
     // can add as many private keys as you want
     return [
-      `0x${privateKey}`,
-      // `0x${process.env.PRIVATE_KEY_2}`,
-      // `0x${process.env.PRIVATE_KEY_3}`,
-      // `0x${process.env.PRIVATE_KEY_4}`,
-      // `0x${process.env.PRIVATE_KEY_5}`,
+      privateKey,
+      // process.env.PRIVATE_KEY_2,
+      // process.env.PRIVATE_KEY_3,
+      // process.env.PRIVATE_KEY_4,
+      // process.env.PRIVATE_KEY_5,
     ];
   } else {
     // use mnemonic
@@ -102,15 +101,8 @@ const config: HardhatUserConfig = {
     ...getAllNetworkConfigs(),
   },
   paths: {
-    artifacts: "./artifacts",
     cache: "./cache_hardhat",
-    deploy: "./deploy",
-    deployments: "./deployments",
-    sources: "./contracts",
     tests: "./tests",
-  },
-  preprocess: {
-    eachLine: removeConsoleLog((hre) => hre.network.name !== "hardhat" && hre.network.name !== "ganache"),
   },
   solidity: {
     compilers: [

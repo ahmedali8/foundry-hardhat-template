@@ -66,7 +66,6 @@
     "hardhat-deploy": "^1.0.4",
     "hardhat-deploy-ethers": "^0.4.2",
     "hardhat-gas-reporter": "2.3.0",
-    "hardhat-preprocessor": "^0.1.5",
     "lodash": "^4.17.21",
     "mocha": "^11.7.1",
     "prettier": "^3.6.2",
