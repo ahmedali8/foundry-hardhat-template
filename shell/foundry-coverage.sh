@@ -7,12 +7,16 @@
 # Strict mode: https://gist.github.com/vncsna/64825d5609c146e80de8b1fd623011ca
 set -euo pipefail
 
-# Generates a coverage report with Forge, and it then opens it in the browser
-function foundryCoverage() {
-  rm -rf coverage
-  forge coverage --report lcov
-  genhtml --branch-coverage --output "coverage" lcov.info
-  open coverage/index.html
-}
+# Generates a coverage report with Forge
+rm -rf coverage
+forge coverage \
+    --report lcov \
+    --report summary \
+    --no-match-coverage '(tests|node_modules|scripts)'
 
-foundryCoverage
+# Fix for lcov v2.0+
+lcov --extract lcov.info --rc derive_function_end_line=0 --output-file lcov.info
+
+# Opens it in the browser
+genhtml lcov.info --rc derive_function_end_line=0 --output-dir coverage
+open coverage/index.html
