@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.26 <=0.9.0;
 
-import { Script } from "forge-std/src/Script.sol";
+import { Config } from "forge-std/Config.sol";
+import { Script } from "forge-std/Script.sol";
 
-abstract contract BaseScript is Script {
+abstract contract BaseScript is Script, Config {
     /// @dev Included to enable compilation of the script without a $MNEMONIC environment variable.
-    string internal constant TEST_MNEMONIC =
-        "test test test test test test test test test test test junk";
+    string internal constant TEST_MNEMONIC = "test test test test test test test test test test test junk";
 
     /// @dev Needed for the deterministic deployments.
     bytes32 internal constant ZERO_SALT = bytes32(0);
@@ -26,6 +26,9 @@ abstract contract BaseScript is Script {
     /// - Otherwise, derive the broadcaster address from $MNEMONIC.
     /// - If $MNEMONIC is not defined, default to a test mnemonic.
     constructor() {
+        // Load config and enable write-back for storing deployment addresses
+        _loadConfig("./config/deployments.toml", true);
+
         uint256 privateKey = vm.envOr({ name: "PRIVATE_KEY", defaultValue: uint256(0) });
 
         if (privateKey != 0) {

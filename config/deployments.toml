@@ -1,0 +1,25 @@
+# deployments.toml
+#
+# IMPORTANT: Chain keys must be either:
+# - Numeric chain ID (e.g., [1], [11155111], [10])
+# - Valid Alloy chain alias (e.g., [mainnet], [sepolia], [optimism])
+#
+# See https://github.com/alloy-rs/chains for valid aliases. For new/custom chains, use numeric IDs or consider opening a PR.
+
+[mainnet.address]
+  lock = "0x"
+
+[mainnet.uint]
+  unlock_time_duration = 31536000 # 365 days
+
+[mainnet.bool]
+  is_testnet = false
+
+[sepolia.address]
+  lock = "0x"
+
+[sepolia.uint]
+  unlock_time_duration = 31536000 # 365 days
+
+[sepolia.bool]
+  is_testnet = true
