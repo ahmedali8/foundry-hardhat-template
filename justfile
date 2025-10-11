@@ -38,15 +38,15 @@ default:
 # Complete project setup
 setup: create-env
 	@{{bun}} install
-	@echo "✅ Setup complete!"
+	@echo "Setup complete!"
 
 # Run all tests
 test-all: test-hardhat test-foundry
-	@echo "✅ All tests completed!"
+	@echo "All tests completed!"
 
 # Clean build artifacts and dependencies
 clean:
-	@echo "🧹 Cleaning project..."
+	@echo "Cleaning project..."
 	@rm -rf node_modules
 	@rm -rf cache
 	@rm -rf cache_hardhat
@@ -57,27 +57,12 @@ clean:
 	@rm -rf .hardhat
 	@rm -rf artifacts
 	@rm -rf types
-	@echo "✅ Clean complete!"
+	@echo "Clean complete!"
 
 # Generate Foundry coverage report
 foundry-report:
-	@echo "📊 Generating Foundry coverage report..."
+	@echo "Generating Foundry coverage report..."
 	@bash {{shell_dir}}/foundry-coverage.sh
-
-# Deploy contract interactively
-deploy-contract contract chain:
-	@echo "Interactive contract deployment"
-	@if [ -n "{{contract}}" ] && [ -n "{{chain}}" ]; then \
-		echo "Deploying contract: {{contract}} on chain: {{chain}}"; \
-		{{forge}} script {{scripts_dir}}/{{contract}}.s.sol \
-		--broadcast \
-		--rpc-url "{{chain}}" \
-		--verify \
-		-vvvv; \
-	else \
-		echo "❌ Contract name and chain cannot be empty."; \
-		exit 1; \
-	fi
 
 # =============================================================================
 # NODE.JS VERSION MANAGEMENT
@@ -85,12 +70,12 @@ deploy-contract contract chain:
 
 # Setup Node.js version using nvm
 setup-with-nvm:
-	@echo "📦 Using nvm to manage Node.js version..."
+	@echo "Using nvm to manage Node.js version..."
 	@if {{nvm}} list | grep -q "{{node_version}}"; then \
-		echo "✅ Node.js {{node_version}} found, switching to it..."; \
+		echo "Node.js {{node_version}} found, switching to it..."; \
 		{{nvm}} use {{node_version}}; \
 	else \
-		echo "📥 Installing Node.js {{node_version}}..."; \
+		echo "Installing Node.js {{node_version}}..."; \
 		{{nvm}} install {{node_version}}; \
 		{{nvm}} use {{node_version}}; \
 	fi
@@ -102,11 +87,11 @@ setup-with-nvm:
 # Create .env file from template
 create-env:
 	@if [ ! -f ./.env ]; then \
-		echo "📄 Creating .env file from template..."; \
+		echo "Creating .env file from template..."; \
 		cp ./.env.example ./.env; \
-		echo "✅ .env file created!"; \
+		echo ".env file created!"; \
 	else \
-		echo "ℹ️  .env file already exists"; \
+		echo ".env file already exists"; \
 	fi
 
 # =============================================================================
@@ -115,12 +100,12 @@ create-env:
 
 # Run Hardhat tests
 test-hardhat:
-	@echo "🧪 Running Hardhat tests..."
+	@echo "Running Hardhat tests..."
 	@{{bun}} run test
-	@echo "✅ Hardhat tests completed!"
+	@echo "Hardhat tests completed!"
 
 # Run Foundry tests
 test-foundry:
-	@echo "🧪 Running Foundry tests..."
+	@echo "Running Foundry tests..."
 	@{{forge}} test
-	@echo "✅ Foundry tests completed!"
+	@echo "Foundry tests completed!"
