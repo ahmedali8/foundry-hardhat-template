@@ -23,8 +23,7 @@
     "enabled": true,
     "rules": {
       "correctness": {
-        "noConstantCondition": "off",
-        "noUnusedImports": "off",
+        "noUnusedImports": "warn",
         "noUnusedVariables": "warn"
       },
       "nursery": {
