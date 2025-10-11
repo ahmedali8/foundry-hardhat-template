@@ -52,7 +52,7 @@ export const NETWORKS: { readonly [key in NetworkName]: Network } = {
   },
   [NetworkName.BASE_SEPOLIA]: {
     chainId: 84531,
-    url: alchemyUrl("base_sepolia"),
+    url: alchemyUrl("base-sepolia"),
   },
 
   // BINANCE SMART CHAIN
@@ -78,7 +78,7 @@ export const NETWORKS: { readonly [key in NetworkName]: Network } = {
   // MATIC/POLYGON
   [NetworkName.POLYGON_MAINNET]: {
     chainId: 137,
-    url: alchemyUrl("polygon_mainnet"),
+    url: alchemyUrl("polygon-mainnet"),
   },
   [NetworkName.POLYGON_AMOY]: {
     chainId: 80_001,
