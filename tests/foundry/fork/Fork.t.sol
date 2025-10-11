@@ -2,16 +2,7 @@
 pragma solidity >=0.8.26 <0.9.0;
 
 import { Base_Test } from "../Base.t.sol";
-
-/// @title IERC20 Interface
-/// @author @0xdev8
-/// @notice Minimal ERC20 interface for testing purposes
-interface IERC20 {
-    /// @notice Returns the balance of tokens for a given account
-    /// @param account The address to query the balance for
-    /// @return The balance of tokens for the account
-    function balanceOf(address account) external view returns (uint256);
-}
+import { IERC20 } from "forge-std/interfaces/IERC20.sol";
 
 /// @title Fork Test Contract
 /// @author @0xdev8
@@ -30,7 +21,7 @@ contract ForkTest is Base_Test {
         }
 
         // Run the test normally, otherwise.
-        vm.createSelectFork({ urlOrAlias: "ethereum", blockNumber: 16_428_000 });
+        vm.createSelectFork({ urlOrAlias: "mainnet", blockNumber: 16_428_000 });
         address usdc = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
         address holder = 0x7713974908Be4BEd47172370115e8b1219F4A5f0;
         uint256 actualBalance = IERC20(usdc).balanceOf(holder);
