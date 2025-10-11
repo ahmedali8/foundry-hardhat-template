@@ -98,6 +98,9 @@ jobs:
       - name: "Install Foundry"
         uses: "foundry-rs/foundry-toolchain@v1"
 
+      - name: "Install Bun"
+        uses: "oven-sh/setup-bun@v2"
+
       - name: "Restore the cached build and the node modules"
         uses: "actions/cache/restore@v3"
         with:
@@ -174,6 +177,9 @@ jobs:
 
       - name: "Install Foundry"
         uses: "foundry-rs/foundry-toolchain@v1"
+
+      - name: "Install Bun"
+        uses: "oven-sh/setup-bun@v2"
 
       - name: "Restore the cached build and the node modules"
         uses: "actions/cache/restore@v3"
