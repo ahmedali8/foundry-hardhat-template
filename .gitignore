@@ -27,14 +27,6 @@ yarn-error.log*
 # Optional npm cache directory
 .npm
 
-# Modern Yarn files
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-
 # Hardhat files
 flattened
 build
@@ -66,4 +58,6 @@ flattened.sol
 # Miscellaneous
 lcov.info
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
 .DS_Store

@@ -8,18 +8,18 @@
   },
   "scripts": {
     "chain": "hardhat node --no-deploy --export-all ./generated/chain.json --network hardhat",
-    "clean": "shx rm -rf ./artifacts ./cache ./cache_hardhat ./coverage ./coverage.json ./types && yarn typechain",
+    "clean": "shx rm -rf ./artifacts ./cache ./cache_hardhat ./coverage ./coverage.json ./types && bun typechain",
     "compile": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat compile",
-    "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"test/**/*.ts\" && yarn typechain",
+    "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"test/**/*.ts\" && bun typechain",
     "deploy:hardhat-deploy": "hardhat deploy --export-all ./deployments/hardhat_contracts.json",
-    "deploy": "yarn deploy:hardhat-deploy --network hardhat",
-    "deploy:network": "yarn deploy:hardhat-deploy --network",
+    "deploy": "bun deploy:hardhat-deploy --network hardhat",
+    "deploy:network": "bun deploy:hardhat-deploy --network",
     "fork": "hardhat node --network hardhat --fork https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
-    "lint": "yarn lint:sol && yarn lint:ts && yarn prettier:check",
-    "lint:sol": "forge fmt --check && yarn solhint \"{script,contracts,test}/**/*.sol\"",
+    "lint": "bun lint:sol && bun lint:ts && bun prettier:check",
+    "lint:sol": "forge fmt --check && bun solhint \"{script,contracts,test}/**/*.sol\"",
     "lint:ts": "eslint --ignore-path ./.eslintignore --ext .js,.ts .",
     "networks": "hardhat networks",
-    "postinstall": "DOTENV_CONFIG_PATH=./.env.example yarn typechain",
+    "postinstall": "DOTENV_CONFIG_PATH=./.env.example bun typechain",
     "prettier:write": "prettier --write \"**/*.{js,json,md,ts,yml}\"",
     "prettier:check": "prettier --check \"**/*.{js,json,md,ts,yml}\"",
     "test": "hardhat test",
@@ -92,6 +92,5 @@
     "solidity",
     "template"
   ],
-  "license": "UNLICENSED",
-  "packageManager": "yarn@4.9.2"
+  "license": "UNLICENSED"
 }

@@ -17,7 +17,7 @@ const infuraUrl = (network: string): string => `https://${network}.infura.io/v3/
  *
  * e.g.
  *
- * $ yarn deploy:network mainnet
+ * $ bun deploy:network mainnet
  *
  * $ npx hardhat run scripts/deploy.ts --network polygon-mainnet
  */

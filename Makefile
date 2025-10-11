@@ -22,7 +22,7 @@ NODE_VERSION := $(shell cat .nvmrc 2>/dev/null || echo "v22")
 PROJECT_NAME := foundry-hardhat-template
 
 # Commands
-YARN := yarn
+BUN := bun
 FORGE := forge
 NVM := nvm
 
@@ -130,7 +130,7 @@ update-libs:
 # Install Node.js dependencies
 install-deps:
 	@echo "📦 Installing Node.js dependencies..."
-	@$(YARN) install --immutable
+	@$(BUN) install --immutable
 	@echo "✅ Node.js dependencies installed!"
 
 # =============================================================================
@@ -158,7 +158,7 @@ create-env:
 # Run Hardhat tests
 test-hardhat:
 	@echo "🧪 Running Hardhat tests..."
-	@$(YARN) test
+	@$(BUN) test
 	@echo "✅ Hardhat tests completed!"
 
 # Run Foundry tests

@@ -1,10 +1,9 @@
-image: "gitpod/workspace-node:latest"
+image: "gitpod/workspace-bun"
 
 tasks:
-  - init: "yarn install"
+  - init: "bun install"
 
 vscode:
   extensions:
     - "esbenp.prettier-vscode"
     - "NomicFoundation.hardhat-solidity"
-    - "ritwickdey.LiveServer"

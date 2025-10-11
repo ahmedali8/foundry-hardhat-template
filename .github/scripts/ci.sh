@@ -37,8 +37,8 @@ sedi "/gitpod-badge/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"
 sedi "/gha/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "README.md"
 sedi "/gha-badge/ s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "README.md"
 
-# Rename instances of "ahmedali8/foundry-hardhat-template" to the new repo name in yarn.lock
-sedi "s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "yarn.lock"
+# Rename instances of "ahmedali8/foundry-hardhat-template" to the new repo name in bun.lock
+sedi "s|ahmedali8/foundry-hardhat-template|"${GITHUB_REPOSITORY}"|;" "bun.lock"
 
 # Copy README.md to GUIDE.md
 cp README.md GUIDE.md

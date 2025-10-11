@@ -25,17 +25,14 @@ jobs:
       - name: "Install Foundry"
         uses: "foundry-rs/foundry-toolchain@v1"
 
-      - name: "Install Node.js"
-        uses: "actions/setup-node@v3"
-        with:
-          cache: "yarn"
-          node-version: 20
+      - name: "Install Bun"
+        uses: "oven-sh/setup-bun@v1"
 
       - name: "Install the Node.js dependencies"
-        run: "yarn install --immutable --inline-builds"
+        run: "bun install"
 
       - name: "Lint the contracts"
-        run: "yarn lint:sol"
+        run: "bun lint:sol"
 
       - name: "Add lint summary"
         run: |
@@ -55,19 +52,16 @@ jobs:
       - name: "Install Foundry"
         uses: "foundry-rs/foundry-toolchain@v1"
 
-      - name: "Install Node.js"
-        uses: "actions/setup-node@v3"
-        with:
-          cache: "yarn"
-          node-version: 20
+      - name: "Install Bun"
+        uses: "oven-sh/setup-bun@v1"
 
       - name: "Install the Node.js dependencies"
-        run: "yarn install --immutable --inline-builds"
+        run: "bun install"
 
       - name: "Hardhat: Compile the contracts"
         run: |
-          yarn clean
-          yarn compile
+          bun clean
+          bun compile
 
       - name: "Forge: Build the contracts and print their size"
         run: |
@@ -117,7 +111,7 @@ jobs:
             out
 
       - name: "Run Hardhat tests"
-        run: "yarn test"
+        run: "bun test"
 
       - name: "Add Hardhat test summary"
         run: |
@@ -194,10 +188,10 @@ jobs:
             out
 
       - name: "Generate the TypeChain bindings"
-        run: "yarn typechain"
+        run: "bun typechain"
 
       - name: "Generate the coverage report"
-        run: "yarn coverage"
+        run: "bun coverage"
 
       - name: "Add Hardhat coverage summary"
         run: |
