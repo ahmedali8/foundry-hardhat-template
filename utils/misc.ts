@@ -1,5 +1,4 @@
-import type { TransactionResponse } from "ethers";
-import { computeAddress, getAddress, solidityPackedKeccak256 } from "ethers";
+import { computeAddress, getAddress, solidityPackedKeccak256, type TransactionResponse } from "ethers";
 
 import { fromWei, toGwei } from "./format";
 
@@ -70,9 +69,7 @@ export async function getExtraGasInfo(tx: TransactionResponse): Promise<string |
   }
 
   const gas = txReceipt.gasUsed;
-  const extraGasInfo = `${toGwei(gasPrice)} gwei, ${fromWei(gasUsed)} ETH, ${gas} gas, txHash: ${
-    tx.hash
-  }`;
+  const extraGasInfo = `${toGwei(gasPrice)} gwei, ${fromWei(gasUsed)} ETH, ${gas} gas, txHash: ${tx.hash}`;
 
   return extraGasInfo;
 }

@@ -1,15 +1,7 @@
-printWidth: 100
+printWidth: 120
 trailingComma: "es5"
-plugins:
-  - "@trivago/prettier-plugin-sort-imports"
 
 overrides:
   - files: "*.md"
     options:
       proseWrap: "always"
-  - files: "*.ts"
-    options:
-      importOrder: ["<THIRD_PARTY_MODULES>", "^[./]"]
-      importOrderParserPlugins: ["typescript"]
-      importOrderSeparation: true
-      importOrderSortSpecifiers: true

@@ -1,5 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { BigNumberish, formatUnits } from "ethers";
+import { type BigNumberish, formatUnits } from "ethers";
 import { fromBn, toBn } from "evm-bn";
 
 /**
@@ -17,13 +17,13 @@ export function convertToInternationalCurrencySystem(labelValue: number): string
 
   if (absValue >= 1e9) {
     // Billion
-    return (absValue / 1e9).toFixed(2).replace(/\.?0+$/, "") + " B";
+    return `${(absValue / 1e9).toFixed(2).replace(/\.?0+$/, "")} B`;
   } else if (absValue >= 1e6) {
     // Million
-    return (absValue / 1e6).toFixed(2).replace(/\.?0+$/, "") + " M";
+    return `${(absValue / 1e6).toFixed(2).replace(/\.?0+$/, "")} M`;
   } else if (absValue >= 1e3) {
     // Thousand
-    return (absValue / 1e3).toFixed(2).replace(/\.?0+$/, "") + " K";
+    return `${(absValue / 1e3).toFixed(2).replace(/\.?0+$/, "")} K`;
   } else {
     return absValue.toString();
   }
@@ -120,11 +120,7 @@ export function fromWeiToNum(value: BigNumberish, decimals: number = 18): number
  * @param precision - The number of decimal places to include in the fixed-point number.
  * @returns The fixed-point number representation of the value.
  */
-export function fromWeiTodNumWithPrecision(
-  value: BigNumberish,
-  decimals: number = 18,
-  precision: number = 4
-): number {
+export function fromWeiTodNumWithPrecision(value: BigNumberish, decimals: number = 18, precision: number = 4): number {
   const fromWeiNum = fromWeiToNum(value, decimals);
   const fromWeiNumToFixed = numWithPrecision(fromWeiNum, precision);
 

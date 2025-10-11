@@ -5,29 +5,30 @@ import { expect } from "chai";
 import { Errors } from "../../../shared/errors";
 
 export default function shouldBehaveLikeWithdraw(): void {
-  context("when called too soon", function () {
+  context("when called too soon", () => {
     it("reverts", async function () {
       await expect(this.contracts.lock.withdraw()).to.be.revertedWithCustomError(
         this.contracts.lock,
-        Errors.Lock_CannotWithdrawYet
+        Errors.Lock_CannotWithdrawYet,
       );
     });
   });
 
-  context("when called from another account", function () {
+  context("when called from another account", () => {
     it("reverts", async function () {
       const anotherAccount = this.signers.accounts[0];
       // We can increase the time in Hardhat Network
       await time.increaseTo(this.unlockTime);
 
       // We use lock.connect() to send a transaction from another account
-      await expect(
-        this.contracts.lock.connect(anotherAccount).withdraw()
-      ).to.be.revertedWithCustomError(this.contracts.lock, Errors.Lock_CallerNotOwner);
+      await expect(this.contracts.lock.connect(anotherAccount).withdraw()).to.be.revertedWithCustomError(
+        this.contracts.lock,
+        Errors.Lock_CallerNotOwner,
+      );
     });
   });
 
-  context("when unlockTime has arrived and the owner calls it", function () {
+  context("when unlockTime has arrived and the owner calls it", () => {
     it("emits Withdrawal event", async function () {
       await time.increaseTo(this.unlockTime);
 
@@ -41,7 +42,7 @@ export default function shouldBehaveLikeWithdraw(): void {
 
       await expect(this.contracts.lock.withdraw()).to.changeEtherBalances(
         [this.signers.deployer, this.contracts.lock],
-        [this.lockedAmount, -this.lockedAmount]
+        [this.lockedAmount, -this.lockedAmount],
       );
     });
   });

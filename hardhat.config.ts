@@ -4,13 +4,12 @@ import "@primitivefi/hardhat-dodoc";
 import { config as dotenvConfig } from "dotenv";
 import "hardhat-contract-sizer";
 import "hardhat-deploy";
+import { resolve } from "node:path";
+import { type HardhatUserConfig } from "hardhat/config";
+import { type HttpNetworkAccountsUserConfig, type NetworkUserConfig } from "hardhat/types";
 import { removeConsoleLog } from "hardhat-preprocessor";
-import type { HardhatUserConfig } from "hardhat/config";
-import type { HttpNetworkAccountsUserConfig, NetworkUserConfig } from "hardhat/types";
-import { resolve } from "path";
 
-import { API_KEYS } from "./config/api-keys";
-import { NETWORKS, Network, NetworkName } from "./config/networks";
+import { NETWORKS, type Network, type NetworkName } from "./config/networks";
 import "./tasks";
 
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
@@ -37,8 +36,8 @@ const getAccounts = (): HttpNetworkAccountsUserConfig => {
   } else {
     // use mnemonic
     return {
-      mnemonic,
       count: 10,
+      mnemonic,
       path: "m/44'/60'/0'/0",
     };
   }
@@ -46,19 +45,16 @@ const getAccounts = (): HttpNetworkAccountsUserConfig => {
 
 // { [key in NetworkName]: { chainId, url, accounts } }
 function getAllNetworkConfigs(): Record<NetworkName, NetworkUserConfig> {
-  const networkConfigs = Object.entries(NETWORKS).reduce<Record<string, NetworkUserConfig>>(
-    (memo, network) => {
-      const key = network[0] as NetworkName;
-      const value = network[1] as Network;
+  const networkConfigs = Object.entries(NETWORKS).reduce<Record<string, NetworkUserConfig>>((memo, network) => {
+    const key = network[0] as NetworkName;
+    const value = network[1] as Network;
 
-      memo[key] = {
-        ...value,
-        accounts: getAccounts(),
-      };
-      return memo;
-    },
-    {}
-  );
+    memo[key] = {
+      ...value,
+      accounts: getAccounts(),
+    };
+    return memo;
+  }, {});
 
   return networkConfigs as Record<NetworkName, NetworkUserConfig>;
 }
@@ -66,26 +62,26 @@ function getAllNetworkConfigs(): Record<NetworkName, NetworkUserConfig> {
 const config: HardhatUserConfig = {
   contractSizer: {
     alphaSort: true,
-    runOnCompile: process.env.CONTRACT_SIZER ? true : false,
     disambiguatePaths: false,
+    runOnCompile: process.env.CONTRACT_SIZER === "true",
   },
   defaultNetwork: "hardhat",
   dodoc: {
-    runOnCompile: false,
     debugMode: false,
-    keepFileStructure: true,
     freshOutput: true,
-    outputDir: "./dodoc",
     include: ["contracts"],
+    keepFileStructure: true,
+    outputDir: "./dodoc",
+    runOnCompile: false,
   },
   etherscan: {
-    apiKey: API_KEYS,
+    apiKey: process.env.ETHERSCAN_API_KEY || "",
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS ? true : false,
-    currency: "USD",
     // gasPrice: process.env.GAS_PRICE, // if commented out then it fetches from ethGasStationAPI
-    coinmarketcap: process.env.COIN_MARKET_CAP_API_KEY || undefined,
+    coinmarketcap: process.env.COIN_MARKET_CAP_API_KEY,
+    currency: "USD",
+    enabled: process.env.REPORT_GAS === "true",
     excludeContracts: [],
   },
   namedAccounts: {
@@ -114,15 +110,13 @@ const config: HardhatUserConfig = {
     tests: "./tests",
   },
   preprocess: {
-    eachLine: removeConsoleLog(
-      (hre) => hre.network.name !== "hardhat" && hre.network.name !== "ganache"
-    ),
+    eachLine: removeConsoleLog((hre) => hre.network.name !== "hardhat" && hre.network.name !== "ganache"),
   },
   solidity: {
     compilers: [
       {
-        version: "0.8.26",
         settings: {
+          evmVersion: "cancun",
           metadata: {
             // Not including the metadata hash
             // https://github.com/paulrberg/hardhat-template/issues/31
@@ -134,8 +128,8 @@ const config: HardhatUserConfig = {
             enabled: true,
             runs: 200,
           },
-          evmVersion: "paris",
         },
+        version: "0.8.26",
       },
     ],
   },

@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import fs, { PathLike } from "fs-extra";
-import path from "path";
+// biome-ignore-all lint/suspicious/noExplicitAny: no-reason
+
+import path from "node:path";
+import fs, { type PathLike } from "fs-extra";
 
 const existsAsync = fs.pathExists;
 const makeDirectoryAsync = fs.mkdir;

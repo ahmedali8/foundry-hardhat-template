@@ -1,11 +1,11 @@
-import type { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { type SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { ethers } from "hardhat";
 
-import type { Contracts, Signers } from "../shared/types";
+import { type Contracts, type Signers } from "../shared/types";
 import { testLock } from "./lock/Lock";
 
-describe("Unit tests", function () {
+describe("Unit tests", () => {
   before(async function () {
     this.signers = {} as Signers;
     this.contracts = {} as Contracts;

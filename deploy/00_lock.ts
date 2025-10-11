@@ -1,12 +1,12 @@
 import { time } from "@nomicfoundation/hardhat-network-helpers";
-import type { BigNumberish } from "ethers";
-import type { DeployFunction, DeployResult } from "hardhat-deploy/types";
-import type { HardhatRuntimeEnvironment } from "hardhat/types";
+import { type BigNumberish } from "ethers";
+import { type HardhatRuntimeEnvironment } from "hardhat/types";
+import { type DeployFunction, type DeployResult } from "hardhat-deploy/types";
 
 import { preDeploy } from "../utils/contracts";
 import { verifyContract } from "../utils/verify";
 
-const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
   const { getNamedAccounts, getChainId, deployments } = hre;
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
@@ -24,9 +24,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   await preDeploy(deployer, "Lock");
   const deployResult: DeployResult = await deploy("Lock", {
+    args: args,
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: args,
     log: true,
     value: lockedAmount.toString(),
     // waitConfirmations: 5,
@@ -36,9 +36,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   if (chainId !== "31337" && chainId !== "1337") {
     const contractPath = `contracts/Lock.sol:Lock`;
     await verifyContract({
-      contractPath: contractPath,
-      contractAddress: deployResult.address,
       args: deployResult.args || [],
+      contractAddress: deployResult.address,
+      contractPath: contractPath,
     });
   }
 };

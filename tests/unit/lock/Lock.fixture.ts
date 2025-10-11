@@ -1,9 +1,8 @@
-import type { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { type SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { time } from "@nomicfoundation/hardhat-network-helpers";
 import { ethers } from "hardhat";
-
-import type { Lock } from "../../../types/Lock";
-import type { Lock__factory } from "../../../types/factories/Lock__factory";
+import { type Lock__factory } from "../../../types/factories/Lock__factory";
+import { type Lock } from "../../../types/Lock";
 
 export async function lockFixture(): Promise<{
   lock: Lock;
@@ -27,5 +26,5 @@ export async function lockFixture(): Promise<{
   const lock: Lock = (await LockFactory.connect(deployer).deploy(...args)) as Lock;
   await lock.waitForDeployment();
 
-  return { lock, unlockTime, lockedAmount };
+  return { lock, lockedAmount, unlockTime };
 }

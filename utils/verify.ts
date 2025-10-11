@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { TransactionResponse } from "ethers";
+// biome-ignore-all lint/suspicious/noExplicitAny: no-reason
+
+import { type TransactionResponse } from "ethers";
 import { run } from "hardhat";
 
 import { delayLog } from "./misc";
@@ -11,10 +12,7 @@ import { delayLog } from "./misc";
  * @param waitConfirmations - The number of confirmations to wait for. Default is 5.
  * @returns A promise that resolves when the specified number of confirmations have been received.
  */
-export async function waitForConfirmations(
-  tx: TransactionResponse,
-  waitConfirmations: number = 5
-): Promise<void> {
+export async function waitForConfirmations(tx: TransactionResponse, waitConfirmations: number = 5): Promise<void> {
   if (!tx) {
     return;
   }

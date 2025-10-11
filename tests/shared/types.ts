@@ -1,6 +1,6 @@
-import type { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { type SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 
-import type { Lock } from "../../types/Lock";
+import { type Lock } from "../../types/Lock";
 
 type Fixture<T> = () => Promise<T>;
 

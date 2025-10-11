@@ -1,4 +1,4 @@
-import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
+import { type HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 import { task } from "hardhat/config";
 
 import { fromWei } from "../utils/format";

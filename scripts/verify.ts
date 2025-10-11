@@ -9,15 +9,15 @@ async function main() {
   const contractPath = `contracts/${contractName}.sol:${contractName}`;
   const contractAddress = "";
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: template for verification
   const args: any[] = ["878979"];
 
   // You don't want to verify on localhost
-  if (chainId != 31337n && chainId != 1337n) {
+  if (chainId !== 31337n && chainId !== 1337n) {
     await verifyContract({
-      contractPath,
-      contractAddress,
       args,
+      contractAddress,
+      contractPath,
     });
   }
 }

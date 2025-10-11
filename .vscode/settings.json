@@ -1,11 +1,10 @@
 {
-  "[solidity]": {
-    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
-  },
-  "[toml]": {
-    "editor.defaultFormatter": "tamasfe.even-better-toml"
-  },
+  "biome.enabled": true,
   "dotenv.enableAutocloaking": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
   "editor.formatOnSave": true,
   "evenBetterToml.formatter.arrayAutoExpand": true,
   "evenBetterToml.formatter.indentEntries": true,
@@ -14,7 +13,27 @@
   "files.associations": {
     ".gas-snapshot": "julia"
   },
-  "npm.exclude": "**/lib/**",
-  "search.exclude": { "**/node_modules": true, "lib": true },
-  "solidity.formatter": "forge"
+  "solidity.formatter": "forge",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[solidity]": {
+    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[md][yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

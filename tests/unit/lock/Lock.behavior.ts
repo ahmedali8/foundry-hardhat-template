@@ -4,20 +4,20 @@ import shouldBehaveLikeOwner from "./view/owner";
 import shouldBehaveLikeUnlockTime from "./view/unlockTime";
 
 export function shouldBehaveLikeLockContract(): void {
-  describe("View Functions", function () {
-    describe("#owner", function () {
+  describe("View Functions", () => {
+    describe("#owner", () => {
       shouldBehaveLikeOwner();
     });
-    describe("#unlockTime", function () {
+    describe("#unlockTime", () => {
       shouldBehaveLikeUnlockTime();
     });
   });
 
-  describe("Effects Functions", function () {
-    describe("#constructor", function () {
+  describe("Effects Functions", () => {
+    describe("#constructor", () => {
       shouldBehaveLikeConstructor();
     });
-    describe("#withdraw", function () {
+    describe("#withdraw", () => {
       shouldBehaveLikeWithdraw();
     });
   });

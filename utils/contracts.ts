@@ -1,9 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// biome-ignore-all lint/suspicious/noExplicitAny: no-reason
+
 import chalk from "chalk";
-import { BaseContract, Contract, Signer } from "ethers";
+import { type BaseContract, type Contract, type Signer } from "ethers";
 import { ethers } from "hardhat";
 
 import { fromWei } from "./format";
+
 import { getExtraGasInfo } from "./misc";
 
 /**
@@ -17,7 +19,7 @@ import { getExtraGasInfo } from "./misc";
 export async function getContractInstance<T extends Contract = Contract>(
   contractNameOrAbi: string | any[],
   address: string,
-  signer?: Signer
+  signer?: Signer,
 ): Promise<T> {
   return (await ethers.getContractAt(contractNameOrAbi, address, signer)) as T;
 }
@@ -33,12 +35,9 @@ export async function getContractInstance<T extends Contract = Contract>(
 export async function getContractInstances<T extends Contract = Contract>(
   contractNameOrAbi: string[] | any[],
   addresses: string[],
-  signers?: Signer[]
+  signers?: Signer[],
 ): Promise<T[] | null> {
-  if (
-    contractNameOrAbi.length !== addresses.length ||
-    (signers && contractNameOrAbi.length !== signers.length)
-  ) {
+  if (contractNameOrAbi.length !== addresses.length || (signers && contractNameOrAbi.length !== signers.length)) {
     return null;
   }
 
@@ -67,14 +66,8 @@ export async function preDeploy(signerAddress: string, contractName: string): Pr
   const { chainId, name } = await ethers.provider.getNetwork();
   const ethBalance = await ethers.provider.getBalance(signerAddress);
 
-  console.log(
-    ` 🛰  Deploying: ${chalk.cyan(contractName)} to Network: ${name} & ChainId: ${chainId}`
-  );
-  console.log(
-    ` 🎭 Deployer: ${chalk.cyan(signerAddress)}, Balance: ${chalk.grey(
-      fromWei(ethBalance ?? 0)
-    )} ETH`
-  );
+  console.log(` 🛰  Deploying: ${chalk.cyan(contractName)} to Network: ${name} & ChainId: ${chainId}`);
+  console.log(` 🎭 Deployer: ${chalk.cyan(signerAddress)}, Balance: ${chalk.grey(fromWei(ethBalance ?? 0))} ETH`);
 }
 
 /**
@@ -84,10 +77,7 @@ export async function preDeploy(signerAddress: string, contractName: string): Pr
  * @param contract - The contract instance.
  * @returns A promise that resolves to the contract instance that has been deployed.
  */
-export async function postDeploy<T extends BaseContract = BaseContract>(
-  contractName: string,
-  contract: T
-): Promise<T> {
+export async function postDeploy<T extends BaseContract = BaseContract>(contractName: string, contract: T): Promise<T> {
   // Wait for the contract to be deployed
   await contract.waitForDeployment();
 
