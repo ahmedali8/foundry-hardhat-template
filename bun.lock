@@ -31,7 +31,7 @@
         "forge-std": "github:foundry-rs/forge-std#v1.11.0",
         "fs-extra": "^11.3.0",
         "hardhat": "2.26.1",
-        "hardhat-contract-sizer": "2.10.0",
+        "hardhat-contract-sizer": "2.10.1",
         "hardhat-deploy": "^1.0.4",
         "hardhat-deploy-ethers": "^0.4.2",
         "hardhat-gas-reporter": "2.3.0",
@@ -645,7 +645,7 @@
 
     "hardhat": ["hardhat@2.26.1", "", { "dependencies": { "@ethereumjs/util": "^9.1.0", "@ethersproject/abi": "^5.1.2", "@nomicfoundation/edr": "^0.11.3", "@nomicfoundation/solidity-analyzer": "^0.1.0", "@sentry/node": "^5.18.1", "adm-zip": "^0.4.16", "aggregate-error": "^3.0.0", "ansi-escapes": "^4.3.0", "boxen": "^5.1.2", "chokidar": "^4.0.0", "ci-info": "^2.0.0", "debug": "^4.1.1", "enquirer": "^2.3.0", "env-paths": "^2.2.0", "ethereum-cryptography": "^1.0.3", "find-up": "^5.0.0", "fp-ts": "1.19.3", "fs-extra": "^7.0.1", "immutable": "^4.0.0-rc.12", "io-ts": "1.10.4", "json-stream-stringify": "^3.1.4", "keccak": "^3.0.2", "lodash": "^4.17.11", "micro-eth-signer": "^0.14.0", "mnemonist": "^0.38.0", "mocha": "^10.0.0", "p-map": "^4.0.0", "picocolors": "^1.1.0", "raw-body": "^2.4.1", "resolve": "1.17.0", "semver": "^6.3.0", "solc": "0.8.26", "source-map-support": "^0.5.13", "stacktrace-parser": "^0.1.10", "tinyglobby": "^0.2.6", "tsort": "0.0.1", "undici": "^5.14.0", "uuid": "^8.3.2", "ws": "^7.4.6" }, "peerDependencies": { "ts-node": "*", "typescript": "*" }, "optionalPeers": ["ts-node", "typescript"], "bin": { "hardhat": "internal/cli/bootstrap.js" } }, "sha512-CXWuUaTtehxiHPCdlitntctfeYRgujmXkNX5gnrD5jdA6HhRQt+WWBZE/gHXbE29y/wDmmUL2d652rI0ctjqjw=="],
 
-    "hardhat-contract-sizer": ["hardhat-contract-sizer@2.10.0", "", { "dependencies": { "chalk": "^4.0.0", "cli-table3": "^0.6.0", "strip-ansi": "^6.0.0" }, "peerDependencies": { "hardhat": "^2.0.0" } }, "sha512-QiinUgBD5MqJZJh1hl1jc9dNnpJg7eE/w4/4GEnrcmZJJTDbVFNe3+/3Ep24XqISSkYxRz36czcPHKHd/a0dwA=="],
+    "hardhat-contract-sizer": ["hardhat-contract-sizer@2.10.1", "", { "dependencies": { "chalk": "^4.0.0", "cli-table3": "^0.6.0", "strip-ansi": "^6.0.0" }, "peerDependencies": { "hardhat": "^2.0.0" } }, "sha512-/PPQQbUMgW6ERzk8M0/DA8/v2TEM9xRRAnF9qKPNMYF6FX5DFWcnxBsQvtp8uBz+vy7rmLyV9Elti2wmmhgkbg=="],
 
     "hardhat-deploy": ["hardhat-deploy@1.0.4", "", { "dependencies": { "@ethersproject/abi": "^5.7.0", "@ethersproject/abstract-signer": "^5.7.0", "@ethersproject/address": "^5.7.0", "@ethersproject/bignumber": "^5.7.0", "@ethersproject/bytes": "^5.7.0", "@ethersproject/constants": "^5.7.0", "@ethersproject/contracts": "^5.7.0", "@ethersproject/providers": "^5.7.2", "@ethersproject/solidity": "^5.7.0", "@ethersproject/transactions": "^5.7.0", "@ethersproject/wallet": "^5.7.0", "axios": "^0.21.1", "chalk": "^4.1.2", "chokidar": "^3.5.2", "debug": "^4.3.2", "enquirer": "^2.3.6", "ethers": "^5.7.0", "form-data": "^4.0.0", "fs-extra": "^10.0.0", "match-all": "^1.2.6", "murmur-128": "^0.2.1", "neoqs": "^6.13.0", "zksync-ethers": "^5.0.0" } }, "sha512-vl6vYQHDtZmILerAIRERI2AjghLH5gJIcQjNrSldn2SjQdY5Y47umXVll4/ywPzBRlsqdpJfL92PhnQ+1xB+Sg=="],
 
